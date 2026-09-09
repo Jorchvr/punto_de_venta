@@ -11,7 +11,11 @@
       "Bash(git add *)",
       "Bash(git -c user.email=serviciosravaku@gmail.com -c user.name=ramoos commit -m \"initial commit\")",
       "Bash(npx expo *)",
-      "Bash(git -c user.email=serviciosravaku@gmail.com -c user.name=ramoos commit -m \"add expo-asset\")"
+      "Bash(git -c user.email=serviciosravaku@gmail.com -c user.name=ramoos commit -m \"add expo-asset\")",
+      "Bash(eas build:view 5aaf1fce-fc45-4960-b8d3-6040a728e892 --json)",
+      "Bash(curl -sL \"https://storage.googleapis.com/eas-workflows-production/logs/73a57b5a-c2d3-4343-bc71-c02930f089cc/5aaf1fce-fc45-4960-b8d3-6040a728e892/2026-09-09T14%3A02%3A45Z-ea789a97-0766-4d99-80ea-7e8e4bf57162.txt?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=www-production%40exponentjs.iam.gserviceaccount.com%2F20260909%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260909T140554Z&X-Goog-Expires=900&X-Goog-SignedHeaders=host&X-Goog-Signature=31f87aafcd3e14f8af22237ccc2b78cb174186d645d6e9459e3f219f9b6d4c1016557470a2e4383e3672c789eaeb36eab6641f45497fcd89de5be899d623474d02042f20f26138bf1c494401f75843ffb6b47ed2846ece24013fe096f7045ad5d04e1b8131f4cf17116d44001eeb1514199ab9a9b5abde6dd8b8673ce1d95eab0f715b87dffdfd1d6a9ac343aeededa85bc1845a1e9a44dc0ca9a6e482887c607ab8ef7025818c815d6a4c1b9b481f6cba60f07c33561bac6b23dd4d332ef3c96515dcfc8f2c03e46cc7dd01c7d6457f534b75774558a5d4b9f02d7b8fe4be7ab9cf4f930e334625bfa0337c4a5242c255db06f47be64599d98280f9f79165e5\")",
+      "Bash(curl -sL \"https://storage.googleapis.com/eas-workflows-production/logs/73a57b5a-c2d3-4343-bc71-c02930f089cc/5aaf1fce-fc45-4960-b8d3-6040a728e892/2026-09-09T14%3A02%3A45Z-ea789a97-0766-4d99-80ea-7e8e4bf57162.txt?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=www-production%40exponentjs.iam.gserviceaccount.com%2F20260909%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260909T140554Z&X-Goog-Expires=900&X-Goog-SignedHeaders=host&X-Goog-Signature=31f87aafcd3e14f8af22237ccc2b78cb174186d645d6e9459e3f219f9b6d4c1016557470a2e4383e3672c789eaeb36eab6641f45497fcd89de5be899d623474d02042f20f26138bf1c494401f75843ffb6b47ed2846ece24013fe096f7045ad5d04e1b8131f4cf17116d44001eeb1514199ab9a9b5abde6dd8b8673ce1d95eab0f715b87dffdfd1d6a9ac343aeededa85bc1845a1e9a44dc0ca9a6e482887c607ab8ef7025818c815d6a4c1b9b481f6cba60f07c33561bac6b23dd4d332ef3c96515dcfc8f2c03e46cc7dd01c7d6457f534b75774558a5d4b9f02d7b8fe4be7ab9cf4f930e334625bfa0337c4a5242c255db06f47be64599d98280f9f79165e5\" --compressed)",
+      "Bash(git -c user.email=serviciosravaku@gmail.com -c user.name=ramoos commit -m \"remove unused reanimated babel plugin\")"
     ]
   }
 }
