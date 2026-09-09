@@ -1,0 +1,49 @@
+{
+  "expo": {
+    "name": "Black Mamba POS",
+    "slug": "black-mamba-pos",
+    "owner": "ramoos",
+    "version": "1.0.0",
+    "orientation": "default",
+    "scheme": "blackmambapos",
+    "userInterfaceStyle": "automatic",
+    "newArchEnabled": true,
+    "splash": {
+      "resizeMode": "contain",
+      "backgroundColor": "#0B0B0F"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.blackmamba.pos"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "backgroundColor": "#0B0B0F"
+      },
+      "package": "com.blackmamba.pos"
+    },
+    "web": {
+      "bundler": "metro",
+      "output": "static"
+    },
+    "plugins": [
+      "expo-router",
+      "expo-sqlite",
+      "expo-font"
+    ],
+    "experiments": {
+      "typedRoutes": false
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "73a57b5a-c2d3-4343-bc71-c02930f089cc"
+      }
+    }
+  }
+}
