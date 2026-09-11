@@ -8,10 +8,6 @@
     "scheme": "blackmambapos",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
-    "splash": {
-      "resizeMode": "contain",
-      "backgroundColor": "#0B0B0F"
-    },
     "assetBundlePatterns": [
       "**/*"
     ],
