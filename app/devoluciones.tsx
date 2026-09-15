@@ -44,11 +44,12 @@ export default function DevolucionesScreen() {
   };
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: colors.bg }} edges={["top"]}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: colors.surface2 }} edges={["top"]}>
       <Header title="Devoluciones" onBack={() => router.back()} />
       <FlatList
         data={ventas}
         keyExtractor={(v) => String(v.Id)}
+        style={{ width: "100%", maxWidth: 900, alignSelf: "center" }}
         contentContainerStyle={{ padding: 12, paddingBottom: 40 }}
         ItemSeparatorComponent={() => <View style={{ height: 8 }} />}
         renderItem={({ item }) => {

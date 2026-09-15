@@ -78,9 +78,18 @@ export default function AjustesScreen() {
   };
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: colors.bg }} edges={["top"]}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: colors.surface2 }} edges={["top"]}>
       <Header title="Ajustes" onBack={() => router.back()} />
-      <ScrollView contentContainerStyle={{ padding: 14, paddingBottom: 40, gap: 14 }}>
+      <ScrollView
+        contentContainerStyle={{
+          padding: 14,
+          paddingBottom: 40,
+          gap: 14,
+          width: "100%",
+          maxWidth: 800,
+          alignSelf: "center",
+        }}
+      >
         <Section title="NEGOCIO">
           <Text style={txtHint(colors.textMuted)}>APARECE EN TICKETS Y CORTE</Text>
           <TextInput

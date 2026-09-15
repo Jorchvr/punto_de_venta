@@ -50,8 +50,8 @@ export default function LoginScreen() {
   };
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: colors.bg }}>
-      <View style={{ padding: 24, alignItems: "center", gap: 6 }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: colors.surface2, alignItems: "center" }}>
+      <View style={{ padding: 24, alignItems: "center", gap: 6, width: "100%", maxWidth: 500 }}>
         <View
           style={{
             width: 220,
@@ -83,7 +83,7 @@ export default function LoginScreen() {
       </View>
 
       {!selected ? (
-        <View style={{ flex: 1, paddingHorizontal: 20 }}>
+        <View style={{ flex: 1, paddingHorizontal: 20, width: "100%", maxWidth: 500 }}>
           <Text
             style={{
               color: colors.textMuted,
@@ -159,7 +159,7 @@ export default function LoginScreen() {
           />
         </View>
       ) : (
-        <View style={{ flex: 1, paddingHorizontal: 20, alignItems: "center" }}>
+        <View style={{ flex: 1, paddingHorizontal: 20, alignItems: "center", width: "100%", maxWidth: 500 }}>
           <Text
             style={{
               color: colors.text,

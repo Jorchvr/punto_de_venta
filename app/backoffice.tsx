@@ -19,9 +19,17 @@ export default function Backoffice() {
   const router = useRouter();
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: colors.bg }} edges={["top"]}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: colors.surface2 }} edges={["top"]}>
       <Header title="Backoffice" onBack={() => router.back()} />
-      <ScrollView contentContainerStyle={{ padding: 14, gap: 10 }}>
+      <ScrollView
+        contentContainerStyle={{
+          padding: 14,
+          gap: 10,
+          width: "100%",
+          maxWidth: 900,
+          alignSelf: "center",
+        }}
+      >
         {ITEMS.map((it) => (
           <Pressable
             key={it.route}

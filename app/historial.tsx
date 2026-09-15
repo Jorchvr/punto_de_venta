@@ -110,9 +110,17 @@ export default function HistorialScreen() {
   const topVendedor = topByUser[0]?.usuario ?? "—";
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: colors.bg }} edges={["top"]}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: colors.surface2 }} edges={["top"]}>
       <Header title="Historial" onBack={() => router.back()} />
-      <ScrollView contentContainerStyle={{ padding: 12, paddingBottom: 40 }}>
+      <ScrollView
+        contentContainerStyle={{
+          padding: 12,
+          paddingBottom: 40,
+          width: "100%",
+          maxWidth: 1200,
+          alignSelf: "center",
+        }}
+      >
         <View style={{ flexDirection: "row", gap: 8 }}>
           <DatePill
             label="DESDE"

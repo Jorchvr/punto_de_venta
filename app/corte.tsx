@@ -80,9 +80,18 @@ export default function CorteScreen() {
   };
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: colors.bg }} edges={["top"]}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: colors.surface2 }} edges={["top"]}>
       <Header title="Corte de caja" onBack={() => router.back()} />
-      <ScrollView contentContainerStyle={{ padding: 12, paddingBottom: 40, alignItems: "center" }}>
+      <ScrollView
+        contentContainerStyle={{
+          padding: 12,
+          paddingBottom: 40,
+          alignItems: "center",
+          width: "100%",
+          maxWidth: 800,
+          alignSelf: "center",
+        }}
+      >
         <View
           style={{
             width: isTablet ? 340 : "100%",

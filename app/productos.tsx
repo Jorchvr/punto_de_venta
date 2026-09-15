@@ -67,9 +67,18 @@ export default function ProductosScreen() {
   };
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: colors.bg }} edges={["top"]}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: colors.surface2 }} edges={["top"]}>
       <Header title="Productos" onBack={() => router.back()} />
-      <View style={{ padding: 10, flexDirection: "row", gap: 8 }}>
+      <View
+        style={{
+          padding: 10,
+          flexDirection: "row",
+          gap: 8,
+          width: "100%",
+          maxWidth: 1000,
+          alignSelf: "center",
+        }}
+      >
         <View
           style={{
             flex: 1,
@@ -105,6 +114,7 @@ export default function ProductosScreen() {
       <FlatList
         data={items}
         keyExtractor={(p) => String(p.Id)}
+        style={{ width: "100%", maxWidth: 1000, alignSelf: "center" }}
         contentContainerStyle={{ padding: 10, paddingBottom: 40 }}
         ItemSeparatorComponent={() => <View style={{ height: 8 }} />}
         renderItem={({ item }) => (
