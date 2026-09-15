@@ -21,15 +21,12 @@ function variantBg(v: Variant, colors: ThemePalette): string {
   switch (v) {
     case "primary":
     case "green":
-      return colors.accent;
-    case "yellow":
-      return "#FDE047";
     case "pink":
-      return "#F472B6";
-    case "blue":
-      return "#60A5FA";
+      return colors.accent;
     case "black":
+    case "yellow":
       return colors.text;
+    case "blue":
     case "surface":
     default:
       return colors.white;
@@ -40,7 +37,9 @@ function variantFg(v: Variant, colors: ThemePalette): string {
   switch (v) {
     case "primary":
     case "green":
+    case "pink":
     case "black":
+    case "yellow":
       return colors.white;
     default:
       return colors.text;

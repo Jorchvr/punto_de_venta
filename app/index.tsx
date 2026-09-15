@@ -30,6 +30,18 @@ type MobileTab = "productos" | "carrito";
 export default function POSScreen() {
   const { width } = useWindowDimensions();
   const isTablet = width >= 768;
+  const isDesktop = width >= 1200;
+  const containerWidth = Math.min(width, 1600);
+  const contentWidth = isDesktop ? containerWidth - 24 : width;
+  const productGridCols = isDesktop ? 4 : isTablet ? 3 : 2;
+  const productCardWidth = (() => {
+    if (isTablet) {
+      const leftPanelWidth = (contentWidth * 6) / 10 - 40;
+      return leftPanelWidth / productGridCols - 16;
+    }
+    return (width - 64) / 2;
+  })();
+  const quickCols = isDesktop ? 4 : 2;
   const { colors } = useTheme();
   const cart = useCart();
   const { usuario, negocio } = useSession();
@@ -172,7 +184,7 @@ export default function POSScreen() {
                     esServicio: item.EsServicio,
                   })
                 }
-                width={isTablet ? 170 : (width - 64) / 2}
+                width={productCardWidth}
               />
             ))}
             {productos.length === 0 && (
@@ -196,7 +208,7 @@ export default function POSScreen() {
 
       <Card>
         <SectionLabel>ACCIONES RÁPIDAS</SectionLabel>
-        <QuickActions />
+        <QuickActions columns={quickCols} />
       </Card>
     </ScrollView>
   );
@@ -401,9 +413,18 @@ export default function POSScreen() {
     <SafeAreaView style={{ flex: 1, backgroundColor: colors.surface2 }} edges={["top"]}>
       <Header title="Power Gym" showBackoffice />
       {isTablet ? (
-        <View style={{ flex: 1, flexDirection: "row" }}>
-          <View style={{ flex: 6 }}>{productsPanel}</View>
-          <View style={{ flex: 4 }}>{cartPanel}</View>
+        <View style={{ flex: 1, alignItems: "center" }}>
+          <View
+            style={{
+              flex: 1,
+              flexDirection: "row",
+              width: "100%",
+              maxWidth: 1600,
+            }}
+          >
+            <View style={{ flex: isDesktop ? 7 : 6 }}>{productsPanel}</View>
+            <View style={{ flex: isDesktop ? 3 : 4 }}>{cartPanel}</View>
+          </View>
         </View>
       ) : (
         <View style={{ flex: 1 }}>
@@ -471,23 +492,29 @@ function Card({
   );
 }
 
-const QUICK = [
-  { route: "/corte", icon: "receipt-outline" as const, label: "CORTE DE CAJA", color: "#FDE047" },
-  { route: "/historial", icon: "time-outline" as const, label: "HISTORIAL", color: "#60A5FA" },
-  { route: "/devoluciones", icon: "return-up-back" as const, label: "DEVOLUCIONES", color: "#F472B6" },
-  { route: "/ajustes", icon: "settings-outline" as const, label: "AJUSTES", color: "#A78BFA" },
+const QUICK: Array<{
+  route: string;
+  icon: React.ComponentProps<typeof Ionicons>["name"];
+  label: string;
+  tone: "accent" | "neutral";
+}> = [
+  { route: "/corte", icon: "receipt-outline", label: "CORTE DE CAJA", tone: "accent" },
+  { route: "/historial", icon: "time-outline", label: "HISTORIAL", tone: "neutral" },
+  { route: "/devoluciones", icon: "return-up-back", label: "DEVOLUCIONES", tone: "accent" },
+  { route: "/ajustes", icon: "settings-outline", label: "AJUSTES", tone: "neutral" },
 ];
 
-function QuickActions() {
+function QuickActions({ columns = 2 }: { columns?: number }) {
   const router = useRouter();
+  const w = `${100 / columns}%` as const;
   return (
     <View style={{ flexDirection: "row", flexWrap: "wrap", marginHorizontal: -6 }}>
       {QUICK.map((q) => (
-        <View key={q.route} style={{ width: "50%", padding: 6 }}>
+        <View key={q.route} style={{ width: w, padding: 6 }}>
           <QuickTile
             icon={q.icon}
             label={q.label}
-            color={q.color}
+            tone={q.tone}
             onPress={() => router.push(q.route as any)}
           />
         </View>
@@ -499,18 +526,20 @@ function QuickActions() {
 function QuickTile({
   icon,
   label,
-  color,
+  tone,
   onPress,
 }: {
   icon: React.ComponentProps<typeof Ionicons>["name"];
   label: string;
-  color: string;
+  tone: "accent" | "neutral";
   onPress: () => void;
 }) {
   const { colors } = useTheme();
   const [pressed, setPressed] = useState(false);
   const OFFSET = 5;
   const SHADOW = "#0F0F17";
+  const badgeBg = tone === "accent" ? colors.accent : colors.surface2;
+  const badgeFg = tone === "accent" ? colors.white : colors.text;
 
   return (
     <View style={{ position: "relative", height: 92 }}>
@@ -550,14 +579,14 @@ function QuickTile({
             width: 52,
             height: 52,
             borderRadius: 10,
-            backgroundColor: color,
+            backgroundColor: badgeBg,
             borderWidth: 2.5,
             borderColor: SHADOW,
             alignItems: "center",
             justifyContent: "center",
           }}
         >
-          <Ionicons name={icon} size={26} color={SHADOW} />
+          <Ionicons name={icon} size={26} color={badgeFg} />
         </View>
         <Text
           style={{
