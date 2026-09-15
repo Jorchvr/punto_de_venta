@@ -12,7 +12,7 @@ export async function respaldar(): Promise<{ ok: boolean; message: string }> {
   const url = URL.createObjectURL(blob);
   const a = document.createElement("a");
   a.href = url;
-  a.download = `blackmamba_${stamp()}.db`;
+  a.download = `powergym_${stamp()}.db`;
   document.body.appendChild(a);
   a.click();
   a.remove();

@@ -68,7 +68,7 @@ export default function ProductosScreen() {
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: colors.bg }} edges={["top"]}>
-      <Header title="PRODUCTOS" onBack={() => router.back()} />
+      <Header title="Productos" onBack={() => router.back()} />
       <View style={{ padding: 10, flexDirection: "row", gap: 8 }}>
         <View
           style={{
@@ -261,7 +261,7 @@ function ProductoModal({
             backgroundColor: colors.bg,
             borderRadius: 12,
             borderWidth: 2,
-            borderColor: "#000",
+            borderColor: colors.borderStrong,
             padding: 16,
             maxHeight: "90%",
           }}
@@ -386,7 +386,7 @@ function Field({
         autoCapitalize={autoCapitalize ?? "none"}
         style={{
           backgroundColor: colors.card,
-          borderColor: "#000",
+          borderColor: colors.borderStrong,
           borderWidth: 2,
           borderRadius: 10,
           paddingHorizontal: 12,

@@ -12,7 +12,7 @@ export async function respaldar(): Promise<{ ok: boolean; message: string }> {
   const src = `${FileSystem.documentDirectory}SQLite/${DB_NAME}`;
   const info = await FileSystem.getInfoAsync(src);
   if (!info.exists) return { ok: false, message: "BD NO ENCONTRADA" };
-  const dest = `${FileSystem.cacheDirectory}blackmamba_${stamp()}.db`;
+  const dest = `${FileSystem.cacheDirectory}powergym_${stamp()}.db`;
   await FileSystem.copyAsync({ from: src, to: dest });
   if (await Sharing.isAvailableAsync()) {
     await Sharing.shareAsync(dest, { mimeType: "application/octet-stream" });

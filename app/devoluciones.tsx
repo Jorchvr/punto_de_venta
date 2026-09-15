@@ -45,7 +45,7 @@ export default function DevolucionesScreen() {
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: colors.bg }} edges={["top"]}>
-      <Header title="DEVOLUCIONES" onBack={() => router.back()} />
+      <Header title="Devoluciones" onBack={() => router.back()} />
       <FlatList
         data={ventas}
         keyExtractor={(v) => String(v.Id)}
@@ -128,7 +128,7 @@ export default function DevolucionesScreen() {
             bottom: 20,
             alignSelf: "center",
             backgroundColor: colors.green,
-            borderColor: "#000",
+            borderColor: colors.borderStrong,
             borderWidth: 2,
             borderRadius: 10,
             paddingHorizontal: 16,

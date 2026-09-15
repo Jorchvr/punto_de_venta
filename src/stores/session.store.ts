@@ -19,7 +19,7 @@ const K_NEG = "@bm:negocio";
 export const useSession = create<SessionState>((set) => ({
   usuario: null,
   rol: null,
-  negocio: "BLACK MAMBA",
+  negocio: "POWER GYM",
   ready: false,
   hydrate: async () => {
     try {
@@ -31,7 +31,7 @@ export const useSession = create<SessionState>((set) => ({
       set({
         usuario: u,
         rol: (r as "Admin" | "Cajero" | null) ?? null,
-        negocio: n ?? "BLACK MAMBA",
+        negocio: n ?? "POWER GYM",
         ready: true,
       });
     } catch {

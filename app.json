@@ -1,25 +1,25 @@
 {
   "expo": {
-    "name": "Black Mamba POS",
-    "slug": "black-mamba-pos",
+    "name": "Power Gym POS",
+    "slug": "powergym-pos",
     "owner": "ramoos",
     "version": "1.0.0",
     "orientation": "default",
-    "scheme": "blackmambapos",
-    "userInterfaceStyle": "automatic",
+    "scheme": "powergympos",
+    "userInterfaceStyle": "light",
     "newArchEnabled": true,
     "assetBundlePatterns": [
       "**/*"
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.blackmamba.pos"
+      "bundleIdentifier": "com.powergym.pos"
     },
     "android": {
       "adaptiveIcon": {
-        "backgroundColor": "#0B0B0F"
+        "backgroundColor": "#FFFFFF"
       },
-      "package": "com.blackmamba.pos"
+      "package": "com.powergym.pos"
     },
     "web": {
       "bundler": "metro",

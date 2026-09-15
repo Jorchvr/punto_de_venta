@@ -18,45 +18,31 @@ interface Props {
 
 export function PaymentMethodChip({ method, selected, onPress }: Props) {
   const { colors } = useTheme();
-  const bg = selected ? colors.yellow : colors.card;
-  const fg = selected ? "#0D0D14" : colors.text;
+  const bg = selected ? colors.accent : colors.surface2;
+  const fg = selected ? colors.white : colors.text;
 
   return (
     <View style={{ flex: 1, minWidth: 130, margin: 4 }}>
-      {selected && (
-        <View
-          style={{
-            position: "absolute",
-            top: 4,
-            left: 4,
-            right: -0,
-            bottom: -0,
-            backgroundColor: "#000",
-            borderRadius: 10,
-          }}
-        />
-      )}
       <Pressable
         onPress={onPress}
         style={{
           backgroundColor: bg,
-          borderColor: "#000",
-          borderWidth: 2,
-          borderRadius: 10,
-          paddingVertical: 12,
-          paddingHorizontal: 10,
+          borderWidth: selected ? 0 : 1,
+          borderColor: colors.border,
+          borderRadius: 14,
+          paddingVertical: 14,
+          paddingHorizontal: 12,
           alignItems: "center",
-          transform: selected ? [{ translateX: 0 }, { translateY: 0 }] : undefined,
         }}
       >
-        <Text style={{ fontSize: 20 }}>{method.emoji}</Text>
+        <Text style={{ fontSize: 22 }}>{method.emoji}</Text>
         <Text
           style={{
             color: fg,
-            fontFamily: "SpaceGrotesk_700Bold",
-            fontSize: 11,
+            fontFamily: "SpaceGrotesk_600SemiBold",
+            fontSize: 12,
             marginTop: 4,
-            letterSpacing: 0.5,
+            letterSpacing: 0.3,
           }}
         >
           {method.label}

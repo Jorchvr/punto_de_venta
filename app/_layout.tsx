@@ -86,7 +86,7 @@ export default function RootLayout() {
 
   return (
     <SafeAreaProvider>
-      <StatusBar style={theme.name === "dark" ? "light" : "dark"} />
+      <StatusBar style="dark" />
       <Stack
         screenOptions={{
           headerShown: false,

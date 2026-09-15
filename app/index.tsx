@@ -297,7 +297,7 @@ export default function POSScreen() {
               style={{
                 backgroundColor: colors.card,
                 borderWidth: 2,
-                borderColor: "#000",
+                borderColor: colors.borderStrong,
                 borderRadius: 10,
                 paddingHorizontal: 12,
                 paddingVertical: 10,
@@ -371,7 +371,7 @@ export default function POSScreen() {
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: colors.bg }} edges={["top"]}>
-      <Header title="TIENDA" showBackoffice />
+      <Header title="Power Gym" showBackoffice />
       {isTablet ? (
         <View style={{ flex: 1, flexDirection: "row" }}>
           <View style={{ flex: 6 }}>{productsPanel}</View>
@@ -470,7 +470,7 @@ function MobileTabs({
                 >
                   <Text
                     style={{
-                      color: "#000",
+                      color: colors.white,
                       fontFamily: "SpaceGrotesk_700Bold",
                       fontSize: 10,
                     }}

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { FlatList, Pressable, Text, TextInput, View } from "react-native";
+import { FlatList, Image, Pressable, Text, TextInput, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useRouter } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
@@ -7,6 +7,8 @@ import { NeoButton } from "@/components/NeoButton";
 import { listUsuarios, type Usuario } from "@/db/usuarios.repo";
 import { useSession } from "@/stores/session.store";
 import { useTheme } from "@/stores/theme.store";
+
+const LOGO = require("../assets/powergym-logo.png");
 
 export default function LoginScreen() {
   const router = useRouter();
@@ -42,34 +44,41 @@ export default function LoginScreen() {
       await login(selected.Nombre, selected.Rol);
       router.replace("/");
     } else {
-      setErr("PIN INCORRECTO");
+      setErr("PIN incorrecto");
       setPin("");
     }
   };
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: colors.bg }}>
-      <View style={{ padding: 20, alignItems: "center" }}>
-        <Text
+      <View style={{ padding: 24, alignItems: "center", gap: 6 }}>
+        <View
           style={{
-            color: colors.text,
-            fontFamily: "SpaceGrotesk_700Bold",
-            fontSize: 28,
-            letterSpacing: 3,
+            width: 220,
+            height: 120,
+            backgroundColor: "#0F0F17",
+            borderRadius: 20,
+            overflow: "hidden",
+            alignItems: "center",
+            justifyContent: "center",
+            marginBottom: 8,
           }}
         >
-          BLACK MAMBA
-        </Text>
+          <Image
+            source={LOGO}
+            style={{ width: "100%", height: "100%" }}
+            resizeMode="contain"
+          />
+        </View>
         <Text
           style={{
             color: colors.textMuted,
             fontFamily: "SpaceGrotesk_500Medium",
-            fontSize: 12,
-            letterSpacing: 2,
-            marginTop: 4,
+            fontSize: 14,
+            letterSpacing: 0.5,
           }}
         >
-          PUNTO DE VENTA
+          Punto de venta
         </Text>
       </View>
 
@@ -78,13 +87,13 @@ export default function LoginScreen() {
           <Text
             style={{
               color: colors.textMuted,
-              fontFamily: "SpaceGrotesk_700Bold",
-              fontSize: 12,
-              letterSpacing: 1,
-              marginBottom: 8,
+              fontFamily: "SpaceGrotesk_600SemiBold",
+              fontSize: 13,
+              letterSpacing: 0.3,
+              marginBottom: 12,
             }}
           >
-            SELECCIONA CAJERO
+            Selecciona cajero
           </Text>
           <FlatList
             data={users}
@@ -95,35 +104,47 @@ export default function LoginScreen() {
                 onPress={() => enter(item)}
                 style={{
                   backgroundColor: colors.card,
-                  borderColor: "#000",
-                  borderWidth: 2,
-                  borderRadius: 10,
-                  padding: 14,
+                  borderColor: colors.border,
+                  borderWidth: 1,
+                  borderRadius: 16,
+                  padding: 16,
                   flexDirection: "row",
                   alignItems: "center",
                   justifyContent: "space-between",
                 }}
               >
-                <View style={{ flexDirection: "row", alignItems: "center", gap: 10 }}>
-                  <Ionicons name="person-circle-outline" size={30} color={colors.accent} />
+                <View style={{ flexDirection: "row", alignItems: "center", gap: 12 }}>
+                  <View
+                    style={{
+                      width: 44,
+                      height: 44,
+                      borderRadius: 999,
+                      backgroundColor: colors.accentSoft,
+                      alignItems: "center",
+                      justifyContent: "center",
+                    }}
+                  >
+                    <Ionicons name="person" size={22} color={colors.accent} />
+                  </View>
                   <View>
                     <Text
                       style={{
                         color: colors.text,
                         fontFamily: "SpaceGrotesk_700Bold",
-                        fontSize: 16,
+                        fontSize: 17,
                       }}
                     >
-                      {item.Nombre.toUpperCase()}
+                      {item.Nombre}
                     </Text>
                     <Text
                       style={{
                         color: colors.textMuted,
                         fontFamily: "SpaceGrotesk_500Medium",
-                        fontSize: 11,
+                        fontSize: 12,
+                        marginTop: 2,
                       }}
                     >
-                      {item.Rol.toUpperCase()} {item.Pin ? "• PIN" : "• SIN PIN"}
+                      {item.Rol} {item.Pin ? "· PIN" : "· sin PIN"}
                     </Text>
                   </View>
                 </View>
@@ -132,7 +153,7 @@ export default function LoginScreen() {
             )}
             ListEmptyComponent={
               <Text style={{ color: colors.textMuted, textAlign: "center", padding: 20 }}>
-                NO HAY USUARIOS. CREA UNO EN AJUSTES.
+                No hay usuarios. Crea uno en Ajustes.
               </Text>
             }
           />
@@ -143,21 +164,20 @@ export default function LoginScreen() {
             style={{
               color: colors.text,
               fontFamily: "SpaceGrotesk_700Bold",
-              fontSize: 18,
-              letterSpacing: 1,
+              fontSize: 20,
             }}
           >
-            {selected.Nombre.toUpperCase()}
+            {selected.Nombre}
           </Text>
           <Text
             style={{
               color: colors.textMuted,
               fontFamily: "SpaceGrotesk_500Medium",
-              fontSize: 12,
+              fontSize: 14,
               marginTop: 4,
             }}
           >
-            INGRESA TU PIN
+            Ingresa tu PIN
           </Text>
           <TextInput
             value={pin}
@@ -166,32 +186,32 @@ export default function LoginScreen() {
             secureTextEntry
             maxLength={4}
             style={{
-              marginTop: 16,
-              width: 200,
+              marginTop: 20,
+              width: 220,
               textAlign: "center",
-              fontSize: 32,
-              letterSpacing: 12,
-              paddingVertical: 12,
+              fontSize: 34,
+              letterSpacing: 14,
+              paddingVertical: 14,
               color: colors.text,
-              backgroundColor: colors.card,
-              borderColor: "#000",
-              borderWidth: 2,
-              borderRadius: 10,
+              backgroundColor: colors.surface2,
+              borderColor: colors.border,
+              borderWidth: 1,
+              borderRadius: 16,
               fontFamily: "SpaceGrotesk_700Bold",
             }}
           />
           {!!err && (
             <Text
               style={{
-                color: colors.pink,
-                marginTop: 8,
-                fontFamily: "SpaceGrotesk_700Bold",
+                color: colors.danger,
+                marginTop: 10,
+                fontFamily: "SpaceGrotesk_600SemiBold",
               }}
             >
               {err}
             </Text>
           )}
-          <View style={{ flexDirection: "row", gap: 10, marginTop: 20 }}>
+          <View style={{ flexDirection: "row", gap: 10, marginTop: 24 }}>
             <NeoButton
               label="Cancelar"
               variant="surface"
@@ -203,7 +223,7 @@ export default function LoginScreen() {
             />
             <NeoButton
               label="Entrar"
-              variant="green"
+              variant="primary"
               onPress={submitPin}
               disabled={pin.length !== 4}
             />

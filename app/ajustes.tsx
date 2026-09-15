@@ -27,7 +27,7 @@ import { useTheme } from "@/stores/theme.store";
 import { restaurar as restaurarBDPlatform } from "@/utils/backup";
 
 export default function AjustesScreen() {
-  const { colors, name, toggle } = useTheme();
+  const { colors } = useTheme();
   const { negocio, setNegocio, logout } = useSession();
   const router = useRouter();
   const [neg, setNeg] = useState(negocio);
@@ -44,7 +44,7 @@ export default function AjustesScreen() {
   }, [load]);
 
   const guardarNeg = async () => {
-    await setNegocio(neg.trim().toUpperCase() || "BLACK MAMBA");
+    await setNegocio(neg.trim().toUpperCase() || "POWER GYM");
     Alert.alert("GUARDADO");
   };
 
@@ -79,15 +79,8 @@ export default function AjustesScreen() {
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: colors.bg }} edges={["top"]}>
-      <Header title="AJUSTES" onBack={() => router.back()} />
+      <Header title="Ajustes" onBack={() => router.back()} />
       <ScrollView contentContainerStyle={{ padding: 14, paddingBottom: 40, gap: 14 }}>
-        <Section title="TEMA">
-          <Row>
-            <Text style={txtLabel(colors.text)}>MODO OSCURO</Text>
-            <Switch value={name === "dark"} onValueChange={toggle} />
-          </Row>
-        </Section>
-
         <Section title="NEGOCIO">
           <Text style={txtHint(colors.textMuted)}>APARECE EN TICKETS Y CORTE</Text>
           <TextInput
@@ -159,7 +152,7 @@ export default function AjustesScreen() {
             marginTop: 10,
           }}
         >
-          BLACK MAMBA POS · V{Constants.expoConfig?.version ?? "1.0.0"}
+          POWER GYM POS · v{Constants.expoConfig?.version ?? "1.0.0"}
         </Text>
       </ScrollView>
 
@@ -220,9 +213,9 @@ const txtHint = (c: string) =>
 
 const inputStyle = (c: { card: string; text: string }) => ({
   backgroundColor: c.card,
-  borderColor: "#000",
-  borderWidth: 2,
-  borderRadius: 10,
+  borderColor: "#D9D9DF",
+  borderWidth: 1,
+  borderRadius: 12,
   paddingHorizontal: 12,
   paddingVertical: 10,
   color: c.text,
@@ -288,7 +281,7 @@ function UsuarioModal({
             backgroundColor: colors.bg,
             borderRadius: 12,
             borderWidth: 2,
-            borderColor: "#000",
+            borderColor: colors.borderStrong,
             padding: 16,
           }}
         >
@@ -330,7 +323,7 @@ function UsuarioModal({
                   flex: 1,
                   paddingVertical: 10,
                   borderWidth: 2,
-                  borderColor: "#000",
+                  borderColor: colors.borderStrong,
                   borderRadius: 10,
                   alignItems: "center",
                   backgroundColor: rol === r ? colors.yellow : colors.card,

@@ -59,7 +59,7 @@ export function CartItemRow({ item, onInc, onDec, onRemove }: Props) {
             height: 32,
             borderRadius: 6,
             borderWidth: 2,
-            borderColor: "#000",
+            borderColor: colors.borderStrong,
             backgroundColor: colors.card,
             alignItems: "center",
             justifyContent: "center",
@@ -79,9 +79,9 @@ export function CartItemRow({ item, onInc, onDec, onRemove }: Props) {
         >
           <Text
             style={{
-              color: "#000",
+              color: colors.white,
               fontFamily: "SpaceGrotesk_700Bold",
-              fontSize: 13,
+              fontSize: 14,
             }}
           >
             {item.cantidad}
@@ -94,7 +94,7 @@ export function CartItemRow({ item, onInc, onDec, onRemove }: Props) {
             height: 32,
             borderRadius: 6,
             borderWidth: 2,
-            borderColor: "#000",
+            borderColor: colors.borderStrong,
             backgroundColor: colors.card,
             alignItems: "center",
             justifyContent: "center",

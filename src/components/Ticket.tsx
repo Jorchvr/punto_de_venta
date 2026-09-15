@@ -103,7 +103,7 @@ export function Ticket(p: Props) {
             backgroundColor: "#FFFFFF",
             borderRadius: 12,
             borderWidth: 2,
-            borderColor: "#000",
+            borderColor: "#D9D9DF",
           }}
         >
           <ScrollView contentContainerStyle={{ padding: 16 }}>
@@ -139,7 +139,7 @@ export function Ticket(p: Props) {
               <Cell w={50} txt="P.U." bold align="right" />
               <Cell w={60} txt="TOTAL" bold align="right" />
             </View>
-            <View style={{ borderBottomWidth: 1, borderColor: "#000" }} />
+            <View style={{ borderBottomWidth: 1, borderColor: "#D9D9DF" }} />
             {p.items.map((i) => (
               <View
                 key={i.productoId}
@@ -178,7 +178,7 @@ export function Ticket(p: Props) {
               gap: 8,
               padding: 12,
               borderTopWidth: 1,
-              borderColor: "#000",
+              borderColor: "#D9D9DF",
             }}
           >
             <View style={{ flex: 1 }}>
@@ -256,7 +256,7 @@ function Dashed() {
     <View
       style={{
         borderTopWidth: 1,
-        borderColor: "#000",
+        borderColor: "#D9D9DF",
         borderStyle: "dashed",
         marginVertical: 6,
       }}

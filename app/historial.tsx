@@ -111,7 +111,7 @@ export default function HistorialScreen() {
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: colors.bg }} edges={["top"]}>
-      <Header title="HISTORIAL" onBack={() => router.back()} />
+      <Header title="Historial" onBack={() => router.back()} />
       <ScrollView contentContainerStyle={{ padding: 12, paddingBottom: 40 }}>
         <View style={{ flexDirection: "row", gap: 8 }}>
           <DatePill
@@ -177,13 +177,13 @@ export default function HistorialScreen() {
             >
               <Text
                 style={{
-                  color: tab === k ? "#000" : colors.text,
+                  color: tab === k ? colors.white : colors.text,
                   fontFamily: "SpaceGrotesk_700Bold",
-                  fontSize: 12,
-                  letterSpacing: 1,
+                  fontSize: 13,
+                  letterSpacing: 0.3,
                 }}
               >
-                {k.toUpperCase()}
+                {k[0].toUpperCase() + k.slice(1)}
               </Text>
             </Pressable>
           ))}
@@ -312,7 +312,7 @@ function KPI({ label, value, color }: { label: string; value: string; color?: st
         minWidth: 140,
         backgroundColor: colors.card,
         borderWidth: 2,
-        borderColor: "#000",
+        borderColor: colors.borderStrong,
         borderRadius: 10,
         padding: 10,
       }}

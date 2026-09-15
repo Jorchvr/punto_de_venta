@@ -1,6 +1,6 @@
 import type { SQLiteDatabase } from "expo-sqlite";
 
-export const DB_NAME = "blackmamba.db";
+export const DB_NAME = "powergym.db";
 const CURRENT_VERSION = 1;
 
 export async function runMigrations(db: SQLiteDatabase): Promise<void> {

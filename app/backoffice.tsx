@@ -20,7 +20,7 @@ export default function Backoffice() {
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: colors.bg }} edges={["top"]}>
-      <Header title="BACKOFFICE" onBack={() => router.back()} />
+      <Header title="Backoffice" onBack={() => router.back()} />
       <ScrollView contentContainerStyle={{ padding: 14, gap: 10 }}>
         {ITEMS.map((it) => (
           <Pressable
@@ -28,7 +28,7 @@ export default function Backoffice() {
             onPress={() => router.push(it.route as any)}
             style={{
               backgroundColor: colors.card,
-              borderColor: "#000",
+              borderColor: colors.borderStrong,
               borderWidth: 2,
               borderRadius: 12,
               padding: 16,
@@ -39,17 +39,15 @@ export default function Backoffice() {
           >
             <View
               style={{
-                width: 46,
-                height: 46,
-                borderRadius: 10,
-                backgroundColor: colors.accent,
+                width: 48,
+                height: 48,
+                borderRadius: 14,
+                backgroundColor: colors.accentSoft,
                 alignItems: "center",
                 justifyContent: "center",
-                borderWidth: 2,
-                borderColor: "#000",
               }}
             >
-              <Ionicons name={it.icon as any} size={22} color="#000" />
+              <Ionicons name={it.icon as any} size={24} color={colors.accent} />
             </View>
             <View style={{ flex: 1 }}>
               <Text

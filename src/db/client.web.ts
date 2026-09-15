@@ -1,9 +1,9 @@
 import initSqlJs, { type Database, type SqlJsStatic } from "sql.js";
 import { DB_NAME, runMigrations } from "./schema";
 
-const IDB_NAME = "blackmamba_db_storage";
+const IDB_NAME = "powergym_db_storage";
 const IDB_STORE = "kv";
-const IDB_KEY = "blackmamba.db";
+const IDB_KEY = "powergym.db";
 
 let SQL: SqlJsStatic | null = null;
 let dbInstance: WebDb | null = null;

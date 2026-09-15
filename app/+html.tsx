@@ -11,16 +11,16 @@ export default function Root({ children }: PropsWithChildren) {
           name="viewport"
           content="width=device-width, initial-scale=1, shrink-to-fit=no, viewport-fit=cover"
         />
-        <meta name="theme-color" content="#0B0B0F" />
+        <meta name="theme-color" content="#E11D2E" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
-        <meta name="apple-mobile-web-app-title" content="BM POS" />
-        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <meta name="apple-mobile-web-app-title" content="PG POS" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
         <link rel="manifest" href="/manifest.webmanifest" />
         <link rel="icon" href="/icon-192.png" />
         <link rel="apple-touch-icon" href="/icon-192.png" />
-        <title>Black Mamba POS</title>
+        <title>Power Gym POS</title>
         <ScrollViewStyleReset />
-        <style dangerouslySetInnerHTML={{ __html: `html,body,#root{background:#0B0B0F}` }} />
+        <style dangerouslySetInnerHTML={{ __html: `html,body,#root{background:#FFFFFF}` }} />
         <script
           dangerouslySetInnerHTML={{
             __html: `

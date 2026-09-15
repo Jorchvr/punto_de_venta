@@ -1,4 +1,4 @@
-# Black Mamba POS
+# Power Gym POS
 
 Punto de venta móvil offline-first para gimnasio/tienda, hecho con **Expo (managed) + expo-router + SQLite + NativeWind**. Corre en **Expo Go** sin dev build. Responsive tablet/celular. Toda la data vive en el dispositivo.
 
@@ -27,7 +27,7 @@ Escanea el QR con **Expo Go** (Android/iOS). La primera vez el dispositivo baja 
 ## Respaldar y restaurar la BD
 
 ### Respaldar
-En **Corte de caja** → botón **"RESPALDAR BD"**. Se copia `blackmamba.db` a caché y se abre el share sheet del sistema (WhatsApp, Drive, Files, correo). Sin red, la app receptora la guardará y podrá subirla cuando haya internet.
+En **Corte de caja** → botón **"RESPALDAR BD"**. Se copia `powergym.db` a caché y se abre el share sheet del sistema (WhatsApp, Drive, Files, correo). Sin red, la app receptora la guardará y podrá subirla cuando haya internet.
 
 ### Restaurar
 En **Ajustes** → **"RESTAURAR BD"** → elige un archivo `.db` previamente respaldado. La app reemplaza la BD local. **Reinicia la app** para que los cambios se apliquen.

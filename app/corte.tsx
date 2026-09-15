@@ -81,7 +81,7 @@ export default function CorteScreen() {
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: colors.bg }} edges={["top"]}>
-      <Header title="CORTE DE CAJA" onBack={() => router.back()} />
+      <Header title="Corte de caja" onBack={() => router.back()} />
       <ScrollView contentContainerStyle={{ padding: 12, paddingBottom: 40, alignItems: "center" }}>
         <View
           style={{
@@ -89,7 +89,7 @@ export default function CorteScreen() {
             backgroundColor: "#FFFFFF",
             borderRadius: 12,
             borderWidth: 2,
-            borderColor: "#000",
+            borderColor: colors.borderStrong,
             padding: 16,
           }}
         >
@@ -226,7 +226,7 @@ function Dashed() {
     <View
       style={{
         borderTopWidth: 1,
-        borderColor: "#000",
+        borderColor: "#D9D9DF",
         borderStyle: "dashed",
         marginVertical: 6,
       }}

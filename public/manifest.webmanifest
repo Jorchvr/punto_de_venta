@@ -1,13 +1,13 @@
 {
-  "name": "Black Mamba POS",
-  "short_name": "BM POS",
+  "name": "Power Gym POS",
+  "short_name": "PG POS",
   "description": "Punto de venta offline",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
   "orientation": "any",
-  "background_color": "#0B0B0F",
-  "theme_color": "#0B0B0F",
+  "background_color": "#FFFFFF",
+  "theme_color": "#E11D2E",
   "lang": "es",
   "icons": [
     {

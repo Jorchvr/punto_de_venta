@@ -1,4 +1,4 @@
-const CACHE = "bm-pos-v2";
+const CACHE = "pg-pos-v3";
 
 self.addEventListener("install", () => {
   self.skipWaiting();
