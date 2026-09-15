@@ -53,7 +53,7 @@ export function ProductCard({ producto, onPress, width = 180 }: Props) {
         <Text
           numberOfLines={2}
           style={{
-            fontFamily: "SpaceGrotesk_700Bold",
+            fontFamily: "Fraunces_700Bold",
             fontSize: 13,
             color: colors.text,
             letterSpacing: 0.5,
@@ -64,7 +64,7 @@ export function ProductCard({ producto, onPress, width = 180 }: Props) {
         <View>
           <Text
             style={{
-              fontFamily: "SpaceGrotesk_700Bold",
+              fontFamily: "Fraunces_700Bold",
               fontSize: 22,
               color: colors.green,
               letterSpacing: 0.3,
@@ -75,7 +75,7 @@ export function ProductCard({ producto, onPress, width = 180 }: Props) {
           {producto.EsServicio === 1 ? (
             <Text
               style={{
-                fontFamily: "SpaceGrotesk_700Bold",
+                fontFamily: "Fraunces_700Bold",
                 fontSize: 11,
                 color: colors.textMuted,
                 letterSpacing: 0.6,
@@ -86,7 +86,7 @@ export function ProductCard({ producto, onPress, width = 180 }: Props) {
           ) : (
             <Text
               style={{
-                fontFamily: "SpaceGrotesk_700Bold",
+                fontFamily: "Fraunces_700Bold",
                 fontSize: 11,
                 color: outOfStock || lowStock ? colors.danger : colors.textMuted,
                 letterSpacing: 0.6,

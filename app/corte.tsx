@@ -105,7 +105,7 @@ export default function CorteScreen() {
           <Text
             style={{
               textAlign: "center",
-              fontFamily: "SpaceGrotesk_700Bold",
+              fontFamily: "Fraunces_700Bold",
               fontSize: 22,
               color: "#000",
               letterSpacing: 2,
@@ -116,7 +116,7 @@ export default function CorteScreen() {
           <Text
             style={{
               textAlign: "center",
-              fontFamily: "SpaceGrotesk_700Bold",
+              fontFamily: "Fraunces_700Bold",
               fontSize: 12,
               color: "#000",
               letterSpacing: 2,
@@ -135,7 +135,7 @@ export default function CorteScreen() {
           <Dashed />
           <Text
             style={{
-              fontFamily: "SpaceGrotesk_700Bold",
+              fontFamily: "Fraunces_700Bold",
               fontSize: 11,
               color: "#000",
               letterSpacing: 1,
@@ -163,7 +163,7 @@ export default function CorteScreen() {
             />
             <Text
               style={{
-                fontFamily: "SpaceGrotesk_700Bold",
+                fontFamily: "Fraunces_700Bold",
                 fontSize: 11,
                 color: "#000",
                 letterSpacing: 1,
@@ -186,7 +186,7 @@ export default function CorteScreen() {
                 <Text
                   style={{
                     color: "#000",
-                    fontFamily: "SpaceGrotesk_500Medium",
+                    fontFamily: "Fraunces_500Medium",
                     fontSize: 10,
                     flex: 1,
                     textDecorationLine: v.Refundada ? "line-through" : "none",
@@ -194,7 +194,7 @@ export default function CorteScreen() {
                 >
                   {fmtTime(fromSqlite(v.Fecha))} {v.Concepto.toUpperCase()}
                 </Text>
-                <Text style={{ color: "#000", fontFamily: "SpaceGrotesk_700Bold", fontSize: 10 }}>
+                <Text style={{ color: "#000", fontFamily: "Fraunces_700Bold", fontSize: 10 }}>
                   {money(v.Total)}
                 </Text>
               </View>
@@ -214,13 +214,13 @@ export default function CorteScreen() {
 function TicketRow({ k, v, big }: { k: string; v: string; big?: boolean }) {
   return (
     <View style={{ flexDirection: "row", justifyContent: "space-between", paddingVertical: 2 }}>
-      <Text style={{ color: "#000", fontFamily: "SpaceGrotesk_700Bold", fontSize: big ? 14 : 11 }}>
+      <Text style={{ color: "#000", fontFamily: "Fraunces_700Bold", fontSize: big ? 14 : 11 }}>
         {k}
       </Text>
       <Text
         style={{
           color: "#000",
-          fontFamily: big ? "SpaceGrotesk_700Bold" : "SpaceGrotesk_500Medium",
+          fontFamily: big ? "Fraunces_700Bold" : "Fraunces_500Medium",
           fontSize: big ? 14 : 11,
         }}
       >

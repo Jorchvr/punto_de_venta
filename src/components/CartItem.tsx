@@ -34,7 +34,7 @@ export function CartItemRow({ item, onInc, onDec, onRemove }: Props) {
           numberOfLines={1}
           style={{
             color: colors.text,
-            fontFamily: "SpaceGrotesk_700Bold",
+            fontFamily: "Fraunces_700Bold",
             fontSize: 13,
           }}
         >
@@ -43,7 +43,7 @@ export function CartItemRow({ item, onInc, onDec, onRemove }: Props) {
         <Text
           style={{
             color: colors.textMuted,
-            fontFamily: "SpaceGrotesk_500Medium",
+            fontFamily: "Fraunces_500Medium",
             fontSize: 11,
             marginTop: 2,
           }}
@@ -80,7 +80,7 @@ export function CartItemRow({ item, onInc, onDec, onRemove }: Props) {
           <Text
             style={{
               color: colors.white,
-              fontFamily: "SpaceGrotesk_700Bold",
+              fontFamily: "Fraunces_700Bold",
               fontSize: 14,
             }}
           >
@@ -107,7 +107,7 @@ export function CartItemRow({ item, onInc, onDec, onRemove }: Props) {
         <Text
           style={{
             color: colors.green,
-            fontFamily: "SpaceGrotesk_700Bold",
+            fontFamily: "Fraunces_700Bold",
             fontSize: 14,
           }}
         >

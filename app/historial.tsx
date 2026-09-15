@@ -186,7 +186,7 @@ export default function HistorialScreen() {
               <Text
                 style={{
                   color: tab === k ? colors.white : colors.text,
-                  fontFamily: "SpaceGrotesk_700Bold",
+                  fontFamily: "Fraunces_700Bold",
                   fontSize: 13,
                   letterSpacing: 0.3,
                 }}
@@ -262,7 +262,7 @@ function DatePill({
       <Text
         style={{
           color: colors.textMuted,
-          fontFamily: "SpaceGrotesk_700Bold",
+          fontFamily: "Fraunces_700Bold",
           fontSize: 10,
           letterSpacing: 1,
         }}
@@ -272,7 +272,7 @@ function DatePill({
       <Text
         style={{
           color: colors.text,
-          fontFamily: "SpaceGrotesk_700Bold",
+          fontFamily: "Fraunces_700Bold",
           fontSize: 14,
           marginTop: 2,
         }}
@@ -300,7 +300,7 @@ function QuickChip({ label, onPress }: { label: string; onPress: () => void }) {
       <Text
         style={{
           color: colors.text,
-          fontFamily: "SpaceGrotesk_700Bold",
+          fontFamily: "Fraunces_700Bold",
           fontSize: 11,
           letterSpacing: 1,
         }}
@@ -328,7 +328,7 @@ function KPI({ label, value, color }: { label: string; value: string; color?: st
       <Text
         style={{
           color: colors.textMuted,
-          fontFamily: "SpaceGrotesk_700Bold",
+          fontFamily: "Fraunces_700Bold",
           fontSize: 10,
           letterSpacing: 1,
         }}
@@ -338,7 +338,7 @@ function KPI({ label, value, color }: { label: string; value: string; color?: st
       <Text
         style={{
           color: color ?? colors.text,
-          fontFamily: "SpaceGrotesk_700Bold",
+          fontFamily: "Fraunces_700Bold",
           fontSize: 18,
           marginTop: 2,
         }}
@@ -393,7 +393,7 @@ function Row({
           style={{
             width: widths[i],
             color: header ? colors.textMuted : colors.text,
-            fontFamily: header ? "SpaceGrotesk_700Bold" : "SpaceGrotesk_500Medium",
+            fontFamily: header ? "Fraunces_700Bold" : "Fraunces_500Medium",
             fontSize: header ? 10 : 12,
             letterSpacing: header ? 1 : 0,
           }}
@@ -444,7 +444,7 @@ function Detalle({ ventas }: { ventas: Venta[] }) {
           <Text
             style={{
               color: colors.accent,
-              fontFamily: "SpaceGrotesk_700Bold",
+              fontFamily: "Fraunces_700Bold",
               fontSize: 13,
               letterSpacing: 1,
               marginBottom: 6,
@@ -467,7 +467,7 @@ function Detalle({ ventas }: { ventas: Venta[] }) {
                 <Text
                   style={{
                     color: v.Refundada ? colors.pink : colors.text,
-                    fontFamily: "SpaceGrotesk_500Medium",
+                    fontFamily: "Fraunces_500Medium",
                     fontSize: 12,
                     textDecorationLine: v.Refundada ? "line-through" : "none",
                   }}
@@ -477,7 +477,7 @@ function Detalle({ ventas }: { ventas: Venta[] }) {
                 <Text
                   style={{
                     color: colors.textMuted,
-                    fontFamily: "SpaceGrotesk_500Medium",
+                    fontFamily: "Fraunces_500Medium",
                     fontSize: 10,
                   }}
                 >
@@ -488,7 +488,7 @@ function Detalle({ ventas }: { ventas: Venta[] }) {
               <Text
                 style={{
                   color: v.Refundada ? colors.pink : colors.green,
-                  fontFamily: "SpaceGrotesk_700Bold",
+                  fontFamily: "Fraunces_700Bold",
                   fontSize: 13,
                 }}
               >

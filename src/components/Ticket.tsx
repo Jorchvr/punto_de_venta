@@ -110,7 +110,7 @@ export function Ticket(p: Props) {
             <Text
               style={{
                 textAlign: "center",
-                fontFamily: "SpaceGrotesk_700Bold",
+                fontFamily: "Fraunces_700Bold",
                 fontSize: 20,
                 letterSpacing: 2,
                 color: "#000",
@@ -121,7 +121,7 @@ export function Ticket(p: Props) {
             <Text
               style={{
                 textAlign: "center",
-                fontFamily: "SpaceGrotesk_500Medium",
+                fontFamily: "Fraunces_500Medium",
                 fontSize: 11,
                 color: "#000",
                 marginBottom: 6,
@@ -165,7 +165,7 @@ export function Ticket(p: Props) {
                 textAlign: "center",
                 marginTop: 10,
                 color: "#000",
-                fontFamily: "SpaceGrotesk_500Medium",
+                fontFamily: "Fraunces_500Medium",
                 fontSize: 10,
               }}
             >
@@ -206,7 +206,7 @@ function Row({ k, v, big }: { k: string; v: string; big?: boolean }) {
       <Text
         style={{
           color: "#000",
-          fontFamily: "SpaceGrotesk_700Bold",
+          fontFamily: "Fraunces_700Bold",
           fontSize: big ? 14 : 11,
         }}
       >
@@ -215,7 +215,7 @@ function Row({ k, v, big }: { k: string; v: string; big?: boolean }) {
       <Text
         style={{
           color: "#000",
-          fontFamily: big ? "SpaceGrotesk_700Bold" : "SpaceGrotesk_500Medium",
+          fontFamily: big ? "Fraunces_700Bold" : "Fraunces_500Medium",
           fontSize: big ? 14 : 11,
         }}
       >
@@ -241,7 +241,7 @@ function Cell({
       style={{
         width: w,
         color: "#000",
-        fontFamily: bold ? "SpaceGrotesk_700Bold" : "SpaceGrotesk_500Medium",
+        fontFamily: bold ? "Fraunces_700Bold" : "Fraunces_500Medium",
         fontSize: 10,
         textAlign: align ?? "left",
       }}

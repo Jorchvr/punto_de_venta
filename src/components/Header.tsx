@@ -60,7 +60,7 @@ export function Header({
         <Text
           style={{
             color: colors.text,
-            fontFamily: "SpaceGrotesk_700Bold",
+            fontFamily: "Fraunces_700Bold",
             fontSize: 22,
             letterSpacing: 0.5,
           }}
@@ -74,7 +74,7 @@ export function Header({
           <Text
             style={{
               color: colors.textMuted,
-              fontFamily: "SpaceGrotesk_600SemiBold",
+              fontFamily: "Fraunces_600SemiBold",
               fontSize: 12,
               letterSpacing: 0.3,
             }}
@@ -97,7 +97,7 @@ export function Header({
             <Text
               style={{
                 color: colors.text,
-                fontFamily: "SpaceGrotesk_700Bold",
+                fontFamily: "Fraunces_700Bold",
                 fontSize: 12,
                 letterSpacing: 0.5,
               }}

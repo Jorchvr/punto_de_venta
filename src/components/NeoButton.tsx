@@ -110,7 +110,7 @@ export function NeoButton({
         <Text
           style={{
             color: fg,
-            fontFamily: "SpaceGrotesk_700Bold",
+            fontFamily: "Fraunces_700Bold",
             fontSize: font,
             letterSpacing: 0.8,
             textAlign: "center",

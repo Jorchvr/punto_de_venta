@@ -69,7 +69,7 @@ export default function DevolucionesScreen() {
                 <Text
                   style={{
                     color: colors.textMuted,
-                    fontFamily: "SpaceGrotesk_700Bold",
+                    fontFamily: "Fraunces_700Bold",
                     fontSize: 11,
                     letterSpacing: 1,
                   }}
@@ -79,7 +79,7 @@ export default function DevolucionesScreen() {
                 <Text
                   style={{
                     color: colors.green,
-                    fontFamily: "SpaceGrotesk_700Bold",
+                    fontFamily: "Fraunces_700Bold",
                     fontSize: 14,
                   }}
                 >
@@ -89,7 +89,7 @@ export default function DevolucionesScreen() {
               <Text
                 style={{
                   color: colors.text,
-                  fontFamily: "SpaceGrotesk_700Bold",
+                  fontFamily: "Fraunces_700Bold",
                   fontSize: 14,
                   marginTop: 4,
                   textDecorationLine: refunded ? "line-through" : "none",
@@ -115,7 +115,7 @@ export default function DevolucionesScreen() {
               color: colors.textMuted,
               textAlign: "center",
               padding: 30,
-              fontFamily: "SpaceGrotesk_500Medium",
+              fontFamily: "Fraunces_500Medium",
             }}
           >
             SIN VENTAS HOY
@@ -136,7 +136,7 @@ export default function DevolucionesScreen() {
             paddingVertical: 10,
           }}
         >
-          <Text style={{ color: "#000", fontFamily: "SpaceGrotesk_700Bold" }}>{toast}</Text>
+          <Text style={{ color: "#000", fontFamily: "Fraunces_700Bold" }}>{toast}</Text>
         </View>
       )}
     </SafeAreaView>

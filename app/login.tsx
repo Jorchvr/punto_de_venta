@@ -73,7 +73,7 @@ export default function LoginScreen() {
         <Text
           style={{
             color: colors.textMuted,
-            fontFamily: "SpaceGrotesk_500Medium",
+            fontFamily: "Fraunces_500Medium",
             fontSize: 14,
             letterSpacing: 0.5,
           }}
@@ -87,7 +87,7 @@ export default function LoginScreen() {
           <Text
             style={{
               color: colors.textMuted,
-              fontFamily: "SpaceGrotesk_600SemiBold",
+              fontFamily: "Fraunces_600SemiBold",
               fontSize: 13,
               letterSpacing: 0.3,
               marginBottom: 12,
@@ -130,7 +130,7 @@ export default function LoginScreen() {
                     <Text
                       style={{
                         color: colors.text,
-                        fontFamily: "SpaceGrotesk_700Bold",
+                        fontFamily: "Fraunces_700Bold",
                         fontSize: 17,
                       }}
                     >
@@ -139,7 +139,7 @@ export default function LoginScreen() {
                     <Text
                       style={{
                         color: colors.textMuted,
-                        fontFamily: "SpaceGrotesk_500Medium",
+                        fontFamily: "Fraunces_500Medium",
                         fontSize: 12,
                         marginTop: 2,
                       }}
@@ -163,7 +163,7 @@ export default function LoginScreen() {
           <Text
             style={{
               color: colors.text,
-              fontFamily: "SpaceGrotesk_700Bold",
+              fontFamily: "Fraunces_700Bold",
               fontSize: 20,
             }}
           >
@@ -172,7 +172,7 @@ export default function LoginScreen() {
           <Text
             style={{
               color: colors.textMuted,
-              fontFamily: "SpaceGrotesk_500Medium",
+              fontFamily: "Fraunces_500Medium",
               fontSize: 14,
               marginTop: 4,
             }}
@@ -197,7 +197,7 @@ export default function LoginScreen() {
               borderColor: colors.border,
               borderWidth: 1,
               borderRadius: 16,
-              fontFamily: "SpaceGrotesk_700Bold",
+              fontFamily: "Fraunces_700Bold",
             }}
           />
           {!!err && (
@@ -205,7 +205,7 @@ export default function LoginScreen() {
               style={{
                 color: colors.danger,
                 marginTop: 10,
-                fontFamily: "SpaceGrotesk_600SemiBold",
+                fontFamily: "Fraunces_600SemiBold",
               }}
             >
               {err}

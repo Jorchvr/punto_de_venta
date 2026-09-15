@@ -120,7 +120,7 @@ export default function AjustesScreen() {
               <Ionicons name="person-circle-outline" size={26} color={colors.accent} />
               <View style={{ flex: 1, marginLeft: 8 }}>
                 <Text style={txtLabel(colors.text)}>{u.Nombre.toUpperCase()}</Text>
-                <Text style={{ color: colors.textMuted, fontFamily: "SpaceGrotesk_500Medium", fontSize: 11 }}>
+                <Text style={{ color: colors.textMuted, fontFamily: "Fraunces_500Medium", fontSize: 11 }}>
                   {u.Rol.toUpperCase()} {u.Pin ? "• PIN" : "• SIN PIN"}
                 </Text>
               </View>
@@ -156,7 +156,7 @@ export default function AjustesScreen() {
           style={{
             color: colors.textMuted,
             textAlign: "center",
-            fontFamily: "SpaceGrotesk_500Medium",
+            fontFamily: "Fraunces_500Medium",
             fontSize: 11,
             marginTop: 10,
           }}
@@ -194,7 +194,7 @@ function Section({ title, children }: { title: string; children: React.ReactNode
       <Text
         style={{
           color: colors.textMuted,
-          fontFamily: "SpaceGrotesk_700Bold",
+          fontFamily: "Fraunces_700Bold",
           fontSize: 11,
           letterSpacing: 1,
         }}
@@ -215,10 +215,10 @@ function Row({ children }: { children: React.ReactNode }) {
 }
 
 const txtLabel = (c: string) =>
-  ({ color: c, fontFamily: "SpaceGrotesk_700Bold", fontSize: 14 } as const);
+  ({ color: c, fontFamily: "Fraunces_700Bold", fontSize: 14 } as const);
 
 const txtHint = (c: string) =>
-  ({ color: c, fontFamily: "SpaceGrotesk_500Medium", fontSize: 11 } as const);
+  ({ color: c, fontFamily: "Fraunces_500Medium", fontSize: 11 } as const);
 
 const inputStyle = (c: { card: string; text: string }) => ({
   backgroundColor: c.card,
@@ -228,7 +228,7 @@ const inputStyle = (c: { card: string; text: string }) => ({
   paddingHorizontal: 12,
   paddingVertical: 10,
   color: c.text,
-  fontFamily: "SpaceGrotesk_700Bold",
+  fontFamily: "Fraunces_700Bold",
   fontSize: 14,
 });
 
@@ -297,7 +297,7 @@ function UsuarioModal({
           <Text
             style={{
               color: colors.text,
-              fontFamily: "SpaceGrotesk_700Bold",
+              fontFamily: "Fraunces_700Bold",
               fontSize: 16,
               marginBottom: 10,
               letterSpacing: 1,
@@ -341,7 +341,7 @@ function UsuarioModal({
                 <Text
                   style={{
                     color: rol === r ? "#000" : colors.text,
-                    fontFamily: "SpaceGrotesk_700Bold",
+                    fontFamily: "Fraunces_700Bold",
                     letterSpacing: 1,
                   }}
                 >

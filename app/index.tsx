@@ -155,7 +155,7 @@ export default function POSScreen() {
               color: colors.text,
               paddingVertical: 12,
               paddingHorizontal: 10,
-              fontFamily: "SpaceGrotesk_600SemiBold",
+              fontFamily: "Fraunces_600SemiBold",
               fontSize: 14,
             }}
           />
@@ -197,7 +197,7 @@ export default function POSScreen() {
                 <Text
                   style={{
                     color: colors.textMuted,
-                    fontFamily: "SpaceGrotesk_700Bold",
+                    fontFamily: "Fraunces_700Bold",
                     letterSpacing: 0.5,
                   }}
                 >
@@ -234,7 +234,7 @@ export default function POSScreen() {
           <Text
             style={{
               color: colors.text,
-              fontFamily: "SpaceGrotesk_700Bold",
+              fontFamily: "Fraunces_700Bold",
               fontSize: 15,
               letterSpacing: 0.8,
             }}
@@ -255,7 +255,7 @@ export default function POSScreen() {
               <Text
                 style={{
                   color: colors.danger,
-                  fontFamily: "SpaceGrotesk_700Bold",
+                  fontFamily: "Fraunces_700Bold",
                   fontSize: 11,
                   letterSpacing: 0.5,
                 }}
@@ -288,7 +288,7 @@ export default function POSScreen() {
               <Text
                 style={{
                   color: colors.textMuted,
-                  fontFamily: "SpaceGrotesk_600SemiBold",
+                  fontFamily: "Fraunces_600SemiBold",
                   fontSize: 13,
                   letterSpacing: 0.5,
                 }}
@@ -346,7 +346,7 @@ export default function POSScreen() {
                   paddingHorizontal: 14,
                   paddingVertical: 12,
                   color: colors.text,
-                  fontFamily: "SpaceGrotesk_700Bold",
+                  fontFamily: "Fraunces_700Bold",
                   fontSize: 20,
                   marginTop: 4,
                 }}
@@ -355,7 +355,7 @@ export default function POSScreen() {
                 <Text
                   style={{
                     color: cambio >= 0 ? colors.green : colors.danger,
-                    fontFamily: "SpaceGrotesk_700Bold",
+                    fontFamily: "Fraunces_700Bold",
                     fontSize: 14,
                     marginTop: 6,
                     letterSpacing: 0.3,
@@ -381,7 +381,7 @@ export default function POSScreen() {
             <Text
               style={{
                 color: colors.white,
-                fontFamily: "SpaceGrotesk_700Bold",
+                fontFamily: "Fraunces_700Bold",
                 fontSize: 16,
                 letterSpacing: 1,
               }}
@@ -391,7 +391,7 @@ export default function POSScreen() {
             <Text
               style={{
                 color: colors.white,
-                fontFamily: "SpaceGrotesk_700Bold",
+                fontFamily: "Fraunces_700Bold",
                 fontSize: 30,
                 letterSpacing: 0.5,
               }}
@@ -597,7 +597,7 @@ function QuickTile({
           style={{
             flex: 1,
             color: colors.text,
-            fontFamily: "SpaceGrotesk_700Bold",
+            fontFamily: "Fraunces_700Bold",
             fontSize: 14,
             letterSpacing: 0.6,
           }}
@@ -615,7 +615,7 @@ function SectionLabel({ children }: { children: React.ReactNode }) {
     <Text
       style={{
         color: colors.textMuted,
-        fontFamily: "SpaceGrotesk_700Bold",
+        fontFamily: "Fraunces_700Bold",
         fontSize: 11,
         letterSpacing: 1.2,
         marginBottom: 8,
@@ -693,7 +693,7 @@ function MobileTabs({
                   <Text
                     style={{
                       color: colors.white,
-                      fontFamily: "SpaceGrotesk_700Bold",
+                      fontFamily: "Fraunces_700Bold",
                       fontSize: 11,
                     }}
                   >
@@ -707,7 +707,7 @@ function MobileTabs({
                 fontSize: 10,
                 marginTop: 4,
                 color: active ? colors.text : colors.textMuted,
-                fontFamily: "SpaceGrotesk_700Bold",
+                fontFamily: "Fraunces_700Bold",
                 letterSpacing: 0.5,
               }}
             >

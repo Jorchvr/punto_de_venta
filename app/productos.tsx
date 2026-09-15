@@ -103,7 +103,7 @@ export default function ProductosScreen() {
               color: colors.text,
               paddingVertical: 10,
               paddingHorizontal: 8,
-              fontFamily: "SpaceGrotesk_500Medium",
+              fontFamily: "Fraunces_500Medium",
               fontSize: 13,
             }}
           />
@@ -135,7 +135,7 @@ export default function ProductosScreen() {
               <Text
                 style={{
                   color: colors.text,
-                  fontFamily: "SpaceGrotesk_700Bold",
+                  fontFamily: "Fraunces_700Bold",
                   fontSize: 14,
                 }}
               >
@@ -144,7 +144,7 @@ export default function ProductosScreen() {
               <Text
                 style={{
                   color: colors.textMuted,
-                  fontFamily: "SpaceGrotesk_500Medium",
+                  fontFamily: "Fraunces_500Medium",
                   fontSize: 11,
                   marginTop: 2,
                 }}
@@ -156,7 +156,7 @@ export default function ProductosScreen() {
             <Text
               style={{
                 color: colors.green,
-                fontFamily: "SpaceGrotesk_700Bold",
+                fontFamily: "Fraunces_700Bold",
                 fontSize: 16,
               }}
             >
@@ -280,7 +280,7 @@ function ProductoModal({
             <Text
               style={{
                 color: colors.text,
-                fontFamily: "SpaceGrotesk_700Bold",
+                fontFamily: "Fraunces_700Bold",
                 fontSize: 18,
                 letterSpacing: 1,
                 marginBottom: 12,
@@ -330,7 +330,7 @@ function ProductoModal({
               <Text
                 style={{
                   color: colors.text,
-                  fontFamily: "SpaceGrotesk_700Bold",
+                  fontFamily: "Fraunces_700Bold",
                   fontSize: 12,
                   letterSpacing: 1,
                 }}
@@ -380,7 +380,7 @@ function Field({
       <Text
         style={{
           color: colors.textMuted,
-          fontFamily: "SpaceGrotesk_700Bold",
+          fontFamily: "Fraunces_700Bold",
           fontSize: 11,
           letterSpacing: 1,
           marginBottom: 4,
@@ -402,7 +402,7 @@ function Field({
           paddingHorizontal: 12,
           paddingVertical: 10,
           color: colors.text,
-          fontFamily: "SpaceGrotesk_500Medium",
+          fontFamily: "Fraunces_500Medium",
           fontSize: 14,
           opacity: disabled ? 0.5 : 1,
         }}

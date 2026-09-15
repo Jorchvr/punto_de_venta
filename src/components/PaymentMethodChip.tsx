@@ -61,7 +61,7 @@ export function PaymentMethodChip({ method, selected, onPress }: Props) {
         <Text
           style={{
             color: selected ? colors.white : colors.text,
-            fontFamily: "SpaceGrotesk_700Bold",
+            fontFamily: "Fraunces_700Bold",
             fontSize: 12,
             letterSpacing: 0.6,
           }}

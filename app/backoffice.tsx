@@ -61,7 +61,7 @@ export default function Backoffice() {
               <Text
                 style={{
                   color: colors.text,
-                  fontFamily: "SpaceGrotesk_700Bold",
+                  fontFamily: "Fraunces_700Bold",
                   fontSize: 15,
                   letterSpacing: 1,
                 }}
@@ -71,7 +71,7 @@ export default function Backoffice() {
               <Text
                 style={{
                   color: colors.textMuted,
-                  fontFamily: "SpaceGrotesk_500Medium",
+                  fontFamily: "Fraunces_500Medium",
                   fontSize: 11,
                   marginTop: 2,
                 }}
