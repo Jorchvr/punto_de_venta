@@ -4,13 +4,8 @@ import { View, ActivityIndicator, Text } from "react-native";
 import { Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import { SafeAreaProvider } from "react-native-safe-area-context";
-import {
-  useFonts,
-  Fraunces_400Regular,
-  Fraunces_500Medium,
-  Fraunces_600SemiBold,
-  Fraunces_700Bold,
-} from "@expo-google-fonts/fraunces";
+import { useFonts } from "expo-font";
+import { DMSerifDisplay_400Regular } from "@expo-google-fonts/dm-serif-display";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import * as SplashScreen from "expo-splash-screen";
 import { getDb } from "@/db/client";
@@ -26,10 +21,10 @@ export default function RootLayout() {
   const session = useSession();
 
   const [fontsLoaded] = useFonts({
-    Fraunces_400Regular,
-    Fraunces_500Medium,
-    Fraunces_600SemiBold,
-    Fraunces_700Bold,
+    Fraunces_400Regular: DMSerifDisplay_400Regular,
+    Fraunces_500Medium: DMSerifDisplay_400Regular,
+    Fraunces_600SemiBold: DMSerifDisplay_400Regular,
+    Fraunces_700Bold: DMSerifDisplay_400Regular,
     ...Ionicons.font,
   });
 
