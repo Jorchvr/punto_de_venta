@@ -11,7 +11,7 @@ const redirects = "/*    /index.html    200\n";
 fs.writeFileSync(path.join(distDir, "_redirects"), redirects, "utf8");
 
 const headers =
-  "/sql-wasm.wasm\n  Content-Type: application/wasm\n  Cache-Control: public, max-age=31536000, immutable\n";
+  "/*.wasm\n  Content-Type: application/wasm\n  Cache-Control: public, max-age=31536000, immutable\n";
 fs.writeFileSync(path.join(distDir, "_headers"), headers, "utf8");
 
 console.log("[postbuild-web] _redirects y _headers escritos en dist/");
