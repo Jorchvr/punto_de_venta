@@ -1,10 +1,6 @@
-const CACHE = "bm-pos-v1";
-const CORE = ["/", "/index.html", "/sql-wasm.wasm", "/manifest.webmanifest"];
+const CACHE = "bm-pos-v2";
 
-self.addEventListener("install", (event) => {
-  event.waitUntil(
-    caches.open(CACHE).then((cache) => cache.addAll(CORE)).catch(() => {})
-  );
+self.addEventListener("install", () => {
   self.skipWaiting();
 });
 
@@ -26,17 +22,24 @@ self.addEventListener("fetch", (event) => {
   if (url.origin !== self.location.origin) return;
 
   event.respondWith(
-    caches.open(CACHE).then(async (cache) => {
+    (async () => {
+      const cache = await caches.open(CACHE);
       const cached = await cache.match(req, { ignoreSearch: true });
-      const fetchPromise = fetch(req)
+
+      const networkFetch = fetch(req)
         .then((res) => {
-          if (res && res.status === 200 && res.type === "basic") {
+          if (res && res.ok && res.status === 200 && res.type === "basic") {
+            const ct = res.headers.get("content-type") || "";
+            if (url.pathname.endsWith(".wasm") && !ct.includes("application/wasm")) {
+              return res;
+            }
             cache.put(req, res.clone()).catch(() => {});
           }
           return res;
         })
         .catch(() => cached);
-      return cached || fetchPromise;
-    })
+
+      return cached || networkFetch;
+    })()
   );
 });
