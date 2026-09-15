@@ -28,20 +28,21 @@ import { money, parseAmount } from "@/utils/money";
 type MobileTab = "productos" | "carrito";
 
 export default function POSScreen() {
-  const { width } = useWindowDimensions();
-  const isTablet = width >= 768;
-  const isDesktop = width >= 1200;
+  const { width, height } = useWindowDimensions();
+  const isTablet =
+    (width >= 900 && height >= 600) || (width >= 720 && height >= 900);
+  const isDesktop = width >= 1200 && height >= 700;
   const containerWidth = Math.min(width, 1600);
   const contentWidth = isDesktop ? containerWidth - 24 : width;
   const productGridCols = isDesktop ? 4 : isTablet ? 3 : 2;
   const productCardWidth = (() => {
     if (isTablet) {
-      const leftPanelWidth = (contentWidth * 6) / 10 - 40;
+      const leftPanelWidth = (contentWidth * (isDesktop ? 7 : 6)) / 10 - 40;
       return leftPanelWidth / productGridCols - 16;
     }
-    return (width - 64) / 2;
+    return (width - 56) / 2;
   })();
-  const quickCols = isDesktop ? 4 : 2;
+  const quickCols = isDesktop ? 4 : isTablet ? 2 : 2;
   const { colors } = useTheme();
   const cart = useCart();
   const { usuario, negocio } = useSession();
@@ -121,7 +122,11 @@ export default function POSScreen() {
   const productsPanel = (
     <ScrollView
       style={{ flex: 1 }}
-      contentContainerStyle={{ padding: 12, paddingBottom: 24 }}
+      contentContainerStyle={{
+        padding: isTablet ? 12 : 8,
+        paddingBottom: 24,
+        gap: 12,
+      }}
       showsVerticalScrollIndicator={false}
     >
       <Card>
@@ -204,8 +209,6 @@ export default function POSScreen() {
         </View>
       </Card>
 
-      <View style={{ height: 14 }} />
-
       <Card>
         <SectionLabel>ACCIONES RÁPIDAS</SectionLabel>
         <QuickActions columns={quickCols} />
@@ -214,7 +217,7 @@ export default function POSScreen() {
   );
 
   const cartPanel = (
-    <View style={{ flex: 1, padding: 12 }}>
+    <View style={{ flex: 1, padding: isTablet ? 12 : 8 }}>
       <Card style={{ flex: 1, padding: 0 }}>
         <View
           style={{
@@ -456,9 +459,11 @@ export default function POSScreen() {
 function Card({
   children,
   style,
+  compact,
 }: {
   children: React.ReactNode;
   style?: any;
+  compact?: boolean;
 }) {
   const { colors } = useTheme();
   return (
@@ -481,7 +486,7 @@ function Card({
             borderColor: "#0F0F17",
             borderWidth: 2.5,
             borderRadius: 14,
-            padding: 16,
+            padding: compact ? 12 : 16,
           },
           style,
         ]}

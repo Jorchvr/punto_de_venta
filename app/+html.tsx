@@ -20,7 +20,19 @@ export default function Root({ children }: PropsWithChildren) {
         <link rel="apple-touch-icon" href="/icon-192.png" />
         <title>Power Gym POS</title>
         <ScrollViewStyleReset />
-        <style dangerouslySetInnerHTML={{ __html: `html,body,#root{background:#FFFFFF}` }} />
+        <style
+          dangerouslySetInnerHTML={{
+            __html: `
+              html,body,#root{background:#FFFFFF}
+              @font-face{
+                font-family:'Ionicons';
+                src:url('/Ionicons.ttf') format('truetype');
+                font-weight:normal;
+                font-style:normal;
+              }
+            `,
+          }}
+        />
         <script
           dangerouslySetInnerHTML={{
             __html: `
