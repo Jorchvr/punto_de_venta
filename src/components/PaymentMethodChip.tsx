@@ -18,31 +18,31 @@ interface Props {
 
 export function PaymentMethodChip({ method, selected, onPress }: Props) {
   const { colors } = useTheme();
-  const bg = selected ? colors.accent : colors.surface2;
-  const fg = selected ? colors.white : colors.text;
 
   return (
     <View style={{ flex: 1, minWidth: 130, margin: 4 }}>
       <Pressable
         onPress={onPress}
         style={{
-          backgroundColor: bg,
-          borderWidth: selected ? 0 : 1,
-          borderColor: colors.border,
-          borderRadius: 14,
+          backgroundColor: selected ? colors.accent : colors.card,
+          borderWidth: 1.5,
+          borderColor: colors.borderStrong,
+          borderRadius: 12,
           paddingVertical: 14,
           paddingHorizontal: 12,
           alignItems: "center",
+          flexDirection: "row",
+          justifyContent: "center",
+          gap: 8,
         }}
       >
-        <Text style={{ fontSize: 22 }}>{method.emoji}</Text>
+        <Text style={{ fontSize: 18 }}>{method.emoji}</Text>
         <Text
           style={{
-            color: fg,
-            fontFamily: "SpaceGrotesk_600SemiBold",
-            fontSize: 12,
-            marginTop: 4,
-            letterSpacing: 0.3,
+            color: selected ? colors.white : colors.text,
+            fontFamily: "SpaceGrotesk_700Bold",
+            fontSize: 13,
+            letterSpacing: 0.5,
           }}
         >
           {method.label}

@@ -14,22 +14,20 @@ interface Props {
   style?: ViewStyle;
 }
 
-type Kind = "solid" | "outline" | "ghost";
+type Kind = "solid-accent" | "solid-dark" | "outline-dark" | "outline-accent";
 
-function resolveVariant(v: Variant): { kind: Kind; tone: "accent" | "neutral" } {
+function resolveVariant(v: Variant): Kind {
   switch (v) {
     case "primary":
     case "green":
-      return { kind: "solid", tone: "accent" };
-    case "pink":
-      return { kind: "outline", tone: "accent" };
+      return "solid-accent";
     case "yellow":
     case "black":
-      return { kind: "solid", tone: "neutral" };
-    case "blue":
-    case "surface":
+      return "solid-dark";
+    case "pink":
+      return "outline-accent";
     default:
-      return { kind: "outline", tone: "neutral" };
+      return "outline-dark";
   }
 }
 
@@ -44,28 +42,25 @@ export function NeoButton({
 }: Props) {
   const { colors } = useTheme();
   const [pressed, setPressed] = useState(false);
-  const { kind, tone } = resolveVariant(variant);
+  const kind = resolveVariant(variant);
 
   const pad = size === "sm" ? 10 : size === "lg" ? 16 : 13;
   const font = size === "sm" ? 13 : size === "lg" ? 17 : 15;
-  const radius = size === "sm" ? 10 : 14;
+  const radius = size === "sm" ? 10 : 12;
 
-  const solidBg = tone === "accent" ? colors.accent : colors.text;
-  const solidFg = colors.white;
-
-  const outlineBorder = tone === "accent" ? colors.accent : colors.borderStrong;
-  const outlineFg = tone === "accent" ? colors.accent : colors.text;
-
-  const bg =
-    kind === "solid"
-      ? solidBg
-      : kind === "ghost"
-        ? "transparent"
-        : colors.white;
-
-  const fg = kind === "solid" ? solidFg : outlineFg;
-  const borderColor = kind === "outline" ? outlineBorder : "transparent";
-  const borderWidth = kind === "outline" ? 1.5 : 0;
+  const styles = (() => {
+    switch (kind) {
+      case "solid-accent":
+        return { bg: colors.accent, fg: colors.white, border: colors.borderStrong };
+      case "solid-dark":
+        return { bg: colors.text, fg: colors.white, border: colors.borderStrong };
+      case "outline-accent":
+        return { bg: colors.card, fg: colors.accent, border: colors.accent };
+      case "outline-dark":
+      default:
+        return { bg: colors.card, fg: colors.text, border: colors.borderStrong };
+    }
+  })();
 
   return (
     <View
@@ -82,9 +77,9 @@ export function NeoButton({
         onPressIn={() => setPressed(true)}
         onPressOut={() => setPressed(false)}
         style={{
-          backgroundColor: bg,
-          borderColor,
-          borderWidth,
+          backgroundColor: styles.bg,
+          borderColor: styles.border,
+          borderWidth: 1.5,
           borderRadius: radius,
           paddingVertical: pad,
           paddingHorizontal: pad + 6,
@@ -95,14 +90,14 @@ export function NeoButton({
       >
         <Text
           style={{
-            color: fg,
-            fontFamily: "SpaceGrotesk_600SemiBold",
+            color: styles.fg,
+            fontFamily: "SpaceGrotesk_700Bold",
             fontSize: font,
-            letterSpacing: 0.2,
+            letterSpacing: 0.5,
             textAlign: "center",
           }}
         >
-          {label}
+          {label.toUpperCase()}
         </Text>
       </Pressable>
     </View>
