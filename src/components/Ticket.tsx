@@ -1,11 +1,10 @@
 import React from "react";
 import { Modal, Pressable, ScrollView, Text, View } from "react-native";
-import * as Print from "expo-print";
-import * as Sharing from "expo-sharing";
 import { Ionicons } from "@expo/vector-icons";
 import { NeoButton } from "./NeoButton";
 import { money } from "../utils/money";
 import { fmtDateTime } from "../utils/date";
+import { printHtml } from "../utils/print";
 import type { CartItem } from "../stores/cart.store";
 import type { MetodoPago } from "../db/ventas.repo";
 
@@ -79,11 +78,7 @@ function ticketHtml(p: Omit<Props, "visible" | "onClose">): string {
 export function Ticket(p: Props) {
   const share = async () => {
     try {
-      const html = ticketHtml(p);
-      const { uri } = await Print.printToFileAsync({ html, base64: false });
-      if (await Sharing.isAvailableAsync()) {
-        await Sharing.shareAsync(uri, { mimeType: "application/pdf" });
-      }
+      await printHtml(ticketHtml(p));
     } catch (e) {
       console.warn("share ticket", e);
     }

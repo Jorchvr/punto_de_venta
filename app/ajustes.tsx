@@ -12,8 +12,6 @@ import {
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useRouter } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
-import * as DocumentPicker from "expo-document-picker";
-import * as FileSystem from "expo-file-system";
 import Constants from "expo-constants";
 import { Header } from "@/components/Header";
 import { NeoButton } from "@/components/NeoButton";
@@ -26,8 +24,7 @@ import {
 } from "@/db/usuarios.repo";
 import { useSession } from "@/stores/session.store";
 import { useTheme } from "@/stores/theme.store";
-import { DB_NAME } from "@/db/schema";
-import { resetDb } from "@/db/client";
+import { restaurar as restaurarBDPlatform } from "@/utils/backup";
 
 export default function AjustesScreen() {
   const { colors, name, toggle } = useTheme();
@@ -53,18 +50,9 @@ export default function AjustesScreen() {
 
   const restaurarBD = async () => {
     try {
-      const res = await DocumentPicker.getDocumentAsync({
-        copyToCacheDirectory: true,
-      });
-      if (res.canceled) return;
-      const src = res.assets[0].uri;
-      const dbDir = `${FileSystem.documentDirectory}SQLite/`;
-      const dbPath = `${dbDir}${DB_NAME}`;
-      const dirInfo = await FileSystem.getInfoAsync(dbDir);
-      if (!dirInfo.exists) await FileSystem.makeDirectoryAsync(dbDir, { intermediates: true });
-      await resetDb();
-      await FileSystem.copyAsync({ from: src, to: dbPath });
-      Alert.alert("BD RESTAURADA", "REINICIA LA APP PARA APLICAR CAMBIOS.");
+      const r = await restaurarBDPlatform();
+      if (r.ok) Alert.alert("BD RESTAURADA", r.message);
+      else if (r.message) Alert.alert("AVISO", r.message);
     } catch (e: any) {
       Alert.alert("ERROR", String(e?.message ?? e));
     }

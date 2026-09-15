@@ -16,3 +16,11 @@ export async function resetDb(): Promise<void> {
     dbInstance = null;
   }
 }
+
+export async function exportDbBytes(): Promise<Uint8Array> {
+  throw new Error("exportDbBytes solo esta disponible en web");
+}
+
+export async function importDbBytes(_bytes: Uint8Array): Promise<void> {
+  throw new Error("importDbBytes solo esta disponible en web");
+}

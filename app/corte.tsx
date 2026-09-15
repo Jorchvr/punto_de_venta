@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import {
   Alert,
+  Platform,
   Pressable,
   ScrollView,
   Text,
@@ -10,9 +11,6 @@ import {
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useRouter } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
-import * as Print from "expo-print";
-import * as Sharing from "expo-sharing";
-import * as FileSystem from "expo-file-system";
 import { Header } from "@/components/Header";
 import { NeoButton } from "@/components/NeoButton";
 import { fromSqlite, ventasHoy, type Venta } from "@/db/ventas.repo";
@@ -20,7 +18,8 @@ import { useSession } from "@/stores/session.store";
 import { useTheme } from "@/stores/theme.store";
 import { fmtDateTime, fmtTime } from "@/utils/date";
 import { money } from "@/utils/money";
-import { DB_NAME } from "@/db/schema";
+import { respaldar as respaldarBDPlatform } from "@/utils/backup";
+import { printHtml } from "@/utils/print";
 
 interface Grupo {
   metodo: string;
@@ -64,10 +63,7 @@ export default function CorteScreen() {
   const compartirPDF = async () => {
     try {
       const html = corteHtml({ negocio, cajero: usuario ?? "", fecha: new Date(), numVentas, total, grupos, ventas });
-      const { uri } = await Print.printToFileAsync({ html });
-      if (await Sharing.isAvailableAsync()) {
-        await Sharing.shareAsync(uri, { mimeType: "application/pdf" });
-      }
+      await printHtml(html);
     } catch (e: any) {
       Alert.alert("ERROR", String(e?.message ?? e));
     }
@@ -75,18 +71,9 @@ export default function CorteScreen() {
 
   const respaldarBD = async () => {
     try {
-      const src = `${FileSystem.documentDirectory}SQLite/${DB_NAME}`;
-      const info = await FileSystem.getInfoAsync(src);
-      if (!info.exists) {
-        Alert.alert("BD NO ENCONTRADA");
-        return;
-      }
-      const stamp = new Date().toISOString().replace(/[:.]/g, "-");
-      const dest = `${FileSystem.cacheDirectory}blackmamba_${stamp}.db`;
-      await FileSystem.copyAsync({ from: src, to: dest });
-      if (await Sharing.isAvailableAsync()) {
-        await Sharing.shareAsync(dest, { mimeType: "application/octet-stream" });
-      }
+      const r = await respaldarBDPlatform();
+      if (!r.ok && r.message) Alert.alert("AVISO", r.message);
+      else if (r.ok && r.message && Platform.OS === "web") Alert.alert("OK", r.message);
     } catch (e: any) {
       Alert.alert("ERROR", String(e?.message ?? e));
     }

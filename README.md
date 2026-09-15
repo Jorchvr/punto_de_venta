@@ -90,3 +90,44 @@ En **Ajustes** → **"RESTAURAR BD"** → elige un archivo `.db` previamente res
 2. Espera que cargue la pantalla de login.
 3. Activa **modo avión** en el teléfono.
 4. Verifica: login → venta → ticket → compartir → historial → corte → respaldar BD. Todo debe funcionar sin errores.
+
+## Versión web (PWA) — Cloudflare Pages
+
+La misma app corre en el navegador como PWA offline. En web:
+
+- La BD SQLite corre en el navegador con **sql.js** (WebAssembly) y persiste en **IndexedDB**.
+- El respaldo descarga un archivo `.db` (mismo formato que en móvil).
+- El "compartir PDF" abre el diálogo de imprimir/guardar del navegador (Ctrl+P / share).
+- Service Worker cachea assets → arranca offline luego del primer load.
+
+### Build local
+
+```bash
+npm run build:web
+```
+
+Genera `dist/` con el sitio estático + `_redirects` y `_headers` para Cloudflare Pages.
+
+Para probarlo local:
+
+```bash
+npx serve dist
+```
+
+### Deploy en Cloudflare Pages
+
+1. Empujar el repo a GitHub.
+2. En Cloudflare Pages: **Create project → Connect to Git → seleccionar el repo**.
+3. Configuración de build:
+   - **Build command**: `npm run build:web`
+   - **Build output directory**: `dist`
+   - **Root directory**: `/`
+   - **Node version**: 20 (variable `NODE_VERSION=20`).
+4. Deploy. Cada push a `main` genera nuevo build. Costo: $0.
+
+### Datos en la versión web
+
+Los datos viven en el navegador del dispositivo (IndexedDB). Si el usuario borra caché o cambia de equipo, pierde la BD. Solución:
+
+- Usar **Respaldar BD** desde Corte de caja regularmente → descarga `.db`.
+- En otro dispositivo/browser: **Restaurar BD** desde Ajustes → subir el `.db`.
