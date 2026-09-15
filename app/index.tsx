@@ -155,7 +155,7 @@ export default function POSScreen() {
             style={{
               flexDirection: "row",
               flexWrap: "wrap",
-              marginHorizontal: -6,
+              marginHorizontal: -8,
               marginTop: 4,
             }}
           >
@@ -172,7 +172,7 @@ export default function POSScreen() {
                     esServicio: item.EsServicio,
                   })
                 }
-                width={isTablet ? 170 : (width - 60) / 2}
+                width={isTablet ? 170 : (width - 64) / 2}
               />
             ))}
             {productos.length === 0 && (
@@ -180,7 +180,7 @@ export default function POSScreen() {
                 <Text
                   style={{
                     color: colors.textMuted,
-                    fontFamily: "SpaceGrotesk_600SemiBold",
+                    fontFamily: "SpaceGrotesk_700Bold",
                     letterSpacing: 0.5,
                   }}
                 >
@@ -190,6 +190,13 @@ export default function POSScreen() {
             )}
           </View>
         </View>
+      </Card>
+
+      <View style={{ height: 14 }} />
+
+      <Card>
+        <SectionLabel>ACCIONES RÁPIDAS</SectionLabel>
+        <QuickActions />
       </Card>
     </ScrollView>
   );
@@ -434,19 +441,136 @@ function Card({
 }) {
   const { colors } = useTheme();
   return (
-    <View
-      style={[
-        {
+    <View style={{ position: "relative" }}>
+      <View
+        style={{
+          position: "absolute",
+          top: 5,
+          left: 5,
+          right: 0,
+          bottom: 0,
+          backgroundColor: "#0F0F17",
+          borderRadius: 14,
+        }}
+      />
+      <View
+        style={[
+          {
+            backgroundColor: colors.card,
+            borderColor: "#0F0F17",
+            borderWidth: 2.5,
+            borderRadius: 14,
+            padding: 16,
+          },
+          style,
+        ]}
+      >
+        {children}
+      </View>
+    </View>
+  );
+}
+
+const QUICK = [
+  { route: "/corte", icon: "receipt-outline" as const, label: "CORTE DE CAJA", color: "#FDE047" },
+  { route: "/historial", icon: "time-outline" as const, label: "HISTORIAL", color: "#60A5FA" },
+  { route: "/devoluciones", icon: "return-up-back" as const, label: "DEVOLUCIONES", color: "#F472B6" },
+  { route: "/ajustes", icon: "settings-outline" as const, label: "AJUSTES", color: "#A78BFA" },
+];
+
+function QuickActions() {
+  const router = useRouter();
+  return (
+    <View style={{ flexDirection: "row", flexWrap: "wrap", marginHorizontal: -6 }}>
+      {QUICK.map((q) => (
+        <View key={q.route} style={{ width: "50%", padding: 6 }}>
+          <QuickTile
+            icon={q.icon}
+            label={q.label}
+            color={q.color}
+            onPress={() => router.push(q.route as any)}
+          />
+        </View>
+      ))}
+    </View>
+  );
+}
+
+function QuickTile({
+  icon,
+  label,
+  color,
+  onPress,
+}: {
+  icon: React.ComponentProps<typeof Ionicons>["name"];
+  label: string;
+  color: string;
+  onPress: () => void;
+}) {
+  const { colors } = useTheme();
+  const [pressed, setPressed] = useState(false);
+  const OFFSET = 5;
+  const SHADOW = "#0F0F17";
+
+  return (
+    <View style={{ position: "relative", height: 92 }}>
+      <View
+        style={{
+          position: "absolute",
+          top: OFFSET,
+          left: OFFSET,
+          right: 0,
+          bottom: 0,
+          backgroundColor: SHADOW,
+          borderRadius: 12,
+        }}
+      />
+      <Pressable
+        onPress={onPress}
+        onPressIn={() => setPressed(true)}
+        onPressOut={() => setPressed(false)}
+        style={{
+          flex: 1,
           backgroundColor: colors.card,
-          borderColor: colors.borderStrong,
-          borderWidth: 1.5,
-          borderRadius: 16,
-          padding: 14,
-        },
-        style,
-      ]}
-    >
-      {children}
+          borderColor: SHADOW,
+          borderWidth: 2.5,
+          borderRadius: 12,
+          padding: 12,
+          flexDirection: "row",
+          alignItems: "center",
+          gap: 12,
+          transform: [
+            { translateX: pressed ? OFFSET : 0 },
+            { translateY: pressed ? OFFSET : 0 },
+          ],
+        }}
+      >
+        <View
+          style={{
+            width: 52,
+            height: 52,
+            borderRadius: 10,
+            backgroundColor: color,
+            borderWidth: 2.5,
+            borderColor: SHADOW,
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <Ionicons name={icon} size={26} color={SHADOW} />
+        </View>
+        <Text
+          style={{
+            flex: 1,
+            color: colors.text,
+            fontFamily: "SpaceGrotesk_700Bold",
+            fontSize: 14,
+            letterSpacing: 0.6,
+          }}
+        >
+          {label}
+        </Text>
+      </Pressable>
     </View>
   );
 }

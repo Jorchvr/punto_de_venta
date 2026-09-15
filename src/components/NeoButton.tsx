@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Pressable, Text, View, type ViewStyle } from "react-native";
 import { useTheme } from "../stores/theme.store";
+import type { ThemePalette } from "../theme/colors";
 
 type Variant = "primary" | "yellow" | "green" | "pink" | "blue" | "surface" | "black";
 
@@ -14,20 +15,35 @@ interface Props {
   style?: ViewStyle;
 }
 
-type Kind = "solid-accent" | "solid-dark" | "outline-dark" | "outline-accent";
+const SHADOW = "#0F0F17";
 
-function resolveVariant(v: Variant): Kind {
+function variantBg(v: Variant, colors: ThemePalette): string {
   switch (v) {
     case "primary":
     case "green":
-      return "solid-accent";
+      return colors.accent;
     case "yellow":
-    case "black":
-      return "solid-dark";
+      return "#FDE047";
     case "pink":
-      return "outline-accent";
+      return "#F472B6";
+    case "blue":
+      return "#60A5FA";
+    case "black":
+      return colors.text;
+    case "surface":
     default:
-      return "outline-dark";
+      return colors.white;
+  }
+}
+
+function variantFg(v: Variant, colors: ThemePalette): string {
+  switch (v) {
+    case "primary":
+    case "green":
+    case "black":
+      return colors.white;
+    default:
+      return colors.text;
   }
 }
 
@@ -42,58 +58,62 @@ export function NeoButton({
 }: Props) {
   const { colors } = useTheme();
   const [pressed, setPressed] = useState(false);
-  const kind = resolveVariant(variant);
 
-  const pad = size === "sm" ? 10 : size === "lg" ? 16 : 13;
-  const font = size === "sm" ? 13 : size === "lg" ? 17 : 15;
-  const radius = size === "sm" ? 10 : 12;
+  const pad = size === "sm" ? 9 : size === "lg" ? 16 : 12;
+  const font = size === "sm" ? 12 : size === "lg" ? 17 : 14;
+  const radius = size === "sm" ? 8 : 10;
+  const offset = size === "sm" ? 3 : size === "lg" ? 5 : 4;
 
-  const styles = (() => {
-    switch (kind) {
-      case "solid-accent":
-        return { bg: colors.accent, fg: colors.white, border: colors.borderStrong };
-      case "solid-dark":
-        return { bg: colors.text, fg: colors.white, border: colors.borderStrong };
-      case "outline-accent":
-        return { bg: colors.card, fg: colors.accent, border: colors.accent };
-      case "outline-dark":
-      default:
-        return { bg: colors.card, fg: colors.text, border: colors.borderStrong };
-    }
-  })();
+  const bg = variantBg(variant, colors);
+  const fg = variantFg(variant, colors);
 
   return (
     <View
       style={[
         {
           width: full ? "100%" : undefined,
-          opacity: disabled ? 0.4 : 1,
+          opacity: disabled ? 0.5 : 1,
+          position: "relative",
         },
         style,
       ]}
     >
+      <View
+        style={{
+          position: "absolute",
+          top: offset,
+          left: offset,
+          right: 0,
+          bottom: 0,
+          backgroundColor: SHADOW,
+          borderRadius: radius,
+        }}
+      />
       <Pressable
         onPress={disabled ? undefined : onPress}
         onPressIn={() => setPressed(true)}
         onPressOut={() => setPressed(false)}
         style={{
-          backgroundColor: styles.bg,
-          borderColor: styles.border,
-          borderWidth: 1.5,
+          backgroundColor: bg,
+          borderColor: SHADOW,
+          borderWidth: 2.5,
           borderRadius: radius,
           paddingVertical: pad,
           paddingHorizontal: pad + 6,
           alignItems: "center",
           justifyContent: "center",
-          transform: [{ scale: pressed ? 0.98 : 1 }],
+          transform: [
+            { translateX: pressed ? offset : 0 },
+            { translateY: pressed ? offset : 0 },
+          ],
         }}
       >
         <Text
           style={{
-            color: styles.fg,
+            color: fg,
             fontFamily: "SpaceGrotesk_700Bold",
             fontSize: font,
-            letterSpacing: 0.5,
+            letterSpacing: 0.8,
             textAlign: "center",
           }}
         >

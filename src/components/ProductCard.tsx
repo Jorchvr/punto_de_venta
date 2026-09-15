@@ -10,6 +10,9 @@ interface Props {
   width?: number;
 }
 
+const SHADOW = "#0F0F17";
+const OFFSET = 4;
+
 export function ProductCard({ producto, onPress, width = 180 }: Props) {
   const { colors } = useTheme();
   const [pressed, setPressed] = useState(false);
@@ -17,19 +20,34 @@ export function ProductCard({ producto, onPress, width = 180 }: Props) {
   const lowStock = producto.EsServicio === 0 && producto.Stock > 0 && producto.Stock < 5;
 
   return (
-    <View style={{ width, height: 132, margin: 6 }}>
+    <View style={{ width, height: 142, margin: 8, position: "relative" }}>
+      <View
+        style={{
+          position: "absolute",
+          top: OFFSET,
+          left: OFFSET,
+          right: 0,
+          bottom: 0,
+          backgroundColor: SHADOW,
+          borderRadius: 10,
+        }}
+      />
       <Pressable
         onPress={onPress}
         onPressIn={() => setPressed(true)}
         onPressOut={() => setPressed(false)}
         style={{
           flex: 1,
-          backgroundColor: pressed ? colors.accentSoft : colors.card,
-          borderColor: colors.borderStrong,
-          borderWidth: 1.5,
-          borderRadius: 12,
+          backgroundColor: colors.card,
+          borderColor: SHADOW,
+          borderWidth: 2.5,
+          borderRadius: 10,
           padding: 12,
           justifyContent: "space-between",
+          transform: [
+            { translateX: pressed ? OFFSET : 0 },
+            { translateY: pressed ? OFFSET : 0 },
+          ],
         }}
       >
         <Text
@@ -38,7 +56,7 @@ export function ProductCard({ producto, onPress, width = 180 }: Props) {
             fontFamily: "SpaceGrotesk_700Bold",
             fontSize: 13,
             color: colors.text,
-            letterSpacing: 0.3,
+            letterSpacing: 0.5,
           }}
         >
           {producto.Nombre.toUpperCase()}
@@ -47,8 +65,9 @@ export function ProductCard({ producto, onPress, width = 180 }: Props) {
           <Text
             style={{
               fontFamily: "SpaceGrotesk_700Bold",
-              fontSize: 20,
+              fontSize: 22,
               color: colors.green,
+              letterSpacing: 0.3,
             }}
           >
             {money(producto.Precio)}
@@ -56,10 +75,10 @@ export function ProductCard({ producto, onPress, width = 180 }: Props) {
           {producto.EsServicio === 1 ? (
             <Text
               style={{
-                fontFamily: "SpaceGrotesk_600SemiBold",
+                fontFamily: "SpaceGrotesk_700Bold",
                 fontSize: 11,
                 color: colors.textMuted,
-                letterSpacing: 0.5,
+                letterSpacing: 0.6,
               }}
             >
               SERVICIO
@@ -70,7 +89,7 @@ export function ProductCard({ producto, onPress, width = 180 }: Props) {
                 fontFamily: "SpaceGrotesk_700Bold",
                 fontSize: 11,
                 color: outOfStock || lowStock ? colors.danger : colors.textMuted,
-                letterSpacing: 0.5,
+                letterSpacing: 0.6,
               }}
             >
               STOCK: {producto.Stock}
