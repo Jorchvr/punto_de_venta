@@ -107,270 +107,291 @@ export default function POSScreen() {
   };
 
   const productsPanel = (
-    <View style={{ flex: 1 }}>
-      <View
-        style={{
-          flexDirection: "row",
-          alignItems: "center",
-          margin: 10,
-          backgroundColor: colors.card,
-          borderColor: colors.border,
-          borderWidth: 2,
-          borderRadius: 10,
-          paddingHorizontal: 10,
-        }}
-      >
-        <Ionicons name="search" size={18} color={colors.textMuted} />
-        <TextInput
-          value={search}
-          onChangeText={(t) => setSearch(t.toUpperCase())}
-          placeholder="BUSCAR PRODUCTO O CODIGO..."
-          placeholderTextColor={colors.textMuted}
-          autoCapitalize="characters"
+    <ScrollView
+      style={{ flex: 1 }}
+      contentContainerStyle={{ padding: 12, paddingBottom: 24 }}
+      showsVerticalScrollIndicator={false}
+    >
+      <Card>
+        <SectionLabel>TIENDA · {productos.length} PRODUCTOS</SectionLabel>
+        <View
           style={{
-            flex: 1,
-            color: colors.text,
-            paddingVertical: 10,
-            paddingHorizontal: 8,
-            fontFamily: "SpaceGrotesk_500Medium",
-            fontSize: 13,
+            flexDirection: "row",
+            alignItems: "center",
+            backgroundColor: colors.surface2,
+            borderColor: colors.borderStrong,
+            borderWidth: 1.5,
+            borderRadius: 12,
+            paddingHorizontal: 12,
+            marginTop: 4,
           }}
-        />
-        {!!search && (
-          <Pressable onPress={() => setSearch("")} hitSlop={10}>
-            <Ionicons name="close-circle" size={18} color={colors.textMuted} />
-          </Pressable>
-        )}
-      </View>
-      <FlatList
-        data={productos}
-        keyExtractor={(p) => String(p.Id)}
-        numColumns={isTablet ? undefined : 2}
-        key={isTablet ? "grid-t" : "grid-m"}
-        contentContainerStyle={{
-          paddingHorizontal: 6,
-          paddingBottom: 20,
-          flexDirection: isTablet ? "row" : undefined,
-          flexWrap: isTablet ? "wrap" : undefined,
-        }}
-        columnWrapperStyle={
-          !isTablet ? { justifyContent: "space-between" } : undefined
-        }
-        renderItem={({ item }) => (
-          <ProductCard
-            producto={item}
-            onPress={() =>
-              cart.add({
-                productoId: item.Id,
-                nombre: item.Nombre,
-                precio: item.Precio,
-                stock: item.Stock,
-                esServicio: item.EsServicio,
-              })
-            }
-            width={isTablet ? 180 : (width - 40) / 2}
+        >
+          <Ionicons name="search" size={20} color={colors.textMuted} />
+          <TextInput
+            value={search}
+            onChangeText={(t) => setSearch(t.toUpperCase())}
+            placeholder="BUSCAR PRODUCTO O CÓDIGO"
+            placeholderTextColor={colors.textMuted}
+            autoCapitalize="characters"
+            style={{
+              flex: 1,
+              color: colors.text,
+              paddingVertical: 12,
+              paddingHorizontal: 10,
+              fontFamily: "SpaceGrotesk_600SemiBold",
+              fontSize: 14,
+            }}
           />
-        )}
-        ListEmptyComponent={
-          <View style={{ padding: 40, alignItems: "center" }}>
-            <Text
-              style={{
-                color: colors.textMuted,
-                fontFamily: "SpaceGrotesk_500Medium",
-              }}
-            >
-              SIN PRODUCTOS
-            </Text>
+          {!!search && (
+            <Pressable onPress={() => setSearch("")} hitSlop={10}>
+              <Ionicons name="close-circle" size={20} color={colors.textMuted} />
+            </Pressable>
+          )}
+        </View>
+
+        <View style={{ marginTop: 14 }}>
+          <SectionLabel>PRODUCTOS RÁPIDOS</SectionLabel>
+          <View
+            style={{
+              flexDirection: "row",
+              flexWrap: "wrap",
+              marginHorizontal: -6,
+              marginTop: 4,
+            }}
+          >
+            {productos.map((item) => (
+              <ProductCard
+                key={item.Id}
+                producto={item}
+                onPress={() =>
+                  cart.add({
+                    productoId: item.Id,
+                    nombre: item.Nombre,
+                    precio: item.Precio,
+                    stock: item.Stock,
+                    esServicio: item.EsServicio,
+                  })
+                }
+                width={isTablet ? 170 : (width - 60) / 2}
+              />
+            ))}
+            {productos.length === 0 && (
+              <View style={{ padding: 40, alignItems: "center", width: "100%" }}>
+                <Text
+                  style={{
+                    color: colors.textMuted,
+                    fontFamily: "SpaceGrotesk_600SemiBold",
+                    letterSpacing: 0.5,
+                  }}
+                >
+                  SIN PRODUCTOS
+                </Text>
+              </View>
+            )}
           </View>
-        }
-      />
-    </View>
+        </View>
+      </Card>
+    </ScrollView>
   );
 
   const cartPanel = (
-    <View
-      style={{
-        flex: 1,
-        backgroundColor: colors.bg,
-        padding: 12,
-        borderLeftWidth: isTablet ? 2 : 0,
-        borderColor: colors.border,
-      }}
-    >
-      <View
-        style={{
-          flexDirection: "row",
-          justifyContent: "space-between",
-          alignItems: "center",
-          marginBottom: 8,
-        }}
-      >
-        <Text
-          style={{
-            color: colors.text,
-            fontFamily: "SpaceGrotesk_700Bold",
-            fontSize: 16,
-            letterSpacing: 1,
-          }}
-        >
-          CARRITO ({cart.count()})
-        </Text>
-        {cart.items.length > 0 && (
-          <NeoButton
-            label="Vaciar"
-            variant="pink"
-            size="sm"
-            onPress={() => cart.clear()}
-          />
-        )}
-      </View>
-      <ScrollView style={{ flex: 1 }} contentContainerStyle={{ paddingBottom: 8 }}>
-        {cart.items.length === 0 ? (
-          <View style={{ padding: 30, alignItems: "center" }}>
-            <Ionicons name="cart-outline" size={48} color={colors.textMuted} />
-            <Text
-              style={{
-                color: colors.textMuted,
-                marginTop: 8,
-                fontFamily: "SpaceGrotesk_500Medium",
-                fontSize: 12,
-              }}
-            >
-              AGREGA PRODUCTOS AL CARRITO
-            </Text>
-          </View>
-        ) : (
-          cart.items.map((it) => (
-            <CartItemRow
-              key={it.productoId}
-              item={it}
-              onInc={() => cart.inc(it.productoId)}
-              onDec={() => cart.dec(it.productoId)}
-              onRemove={() => cart.remove(it.productoId)}
-            />
-          ))
-        )}
-      </ScrollView>
-
-      <View style={{ marginTop: 6 }}>
-        <Text
-          style={{
-            color: colors.textMuted,
-            fontFamily: "SpaceGrotesk_700Bold",
-            fontSize: 11,
-            letterSpacing: 1,
-            marginBottom: 4,
-          }}
-        >
-          METODO DE PAGO
-        </Text>
-        <View style={{ flexDirection: "row", flexWrap: "wrap", marginHorizontal: -4 }}>
-          {METODOS.map((m) => (
-            <PaymentMethodChip
-              key={m.key}
-              method={m}
-              selected={cart.metodo === m.key}
-              onPress={() => cart.setMetodo(m.key)}
-            />
-          ))}
-        </View>
-
-        {requiereCambio && (
-          <View style={{ marginTop: 10 }}>
-            <Text
-              style={{
-                color: colors.textMuted,
-                fontFamily: "SpaceGrotesk_700Bold",
-                fontSize: 11,
-                letterSpacing: 1,
-                marginBottom: 4,
-              }}
-            >
-              MONTO RECIBIDO
-            </Text>
-            <TextInput
-              value={cart.recibido}
-              onChangeText={cart.setRecibido}
-              keyboardType="decimal-pad"
-              placeholder="0.00"
-              placeholderTextColor={colors.textMuted}
-              style={{
-                backgroundColor: colors.card,
-                borderWidth: 2,
-                borderColor: colors.borderStrong,
-                borderRadius: 10,
-                paddingHorizontal: 12,
-                paddingVertical: 10,
-                color: colors.text,
-                fontFamily: "SpaceGrotesk_700Bold",
-                fontSize: 18,
-              }}
-            />
-            {cart.items.length > 0 && (
-              <Text
-                style={{
-                  color: cambio >= 0 ? colors.green : colors.pink,
-                  fontFamily: "SpaceGrotesk_700Bold",
-                  fontSize: 14,
-                  marginTop: 4,
-                }}
-              >
-                CAMBIO: {money(Math.max(0, cambio))}
-              </Text>
-            )}
-          </View>
-        )}
-
+    <View style={{ flex: 1, padding: 12 }}>
+      <Card style={{ flex: 1, padding: 0 }}>
         <View
           style={{
-            marginTop: 10,
-            paddingVertical: 10,
-            paddingHorizontal: 12,
-            backgroundColor: colors.surface2,
-            borderRadius: 10,
-            borderWidth: 2,
-            borderColor: colors.border,
+            paddingHorizontal: 16,
+            paddingTop: 14,
+            paddingBottom: 8,
             flexDirection: "row",
             justifyContent: "space-between",
             alignItems: "center",
+            borderBottomWidth: 1,
+            borderColor: colors.border,
           }}
         >
           <Text
             style={{
               color: colors.text,
               fontFamily: "SpaceGrotesk_700Bold",
-              fontSize: 18,
-              letterSpacing: 1,
+              fontSize: 15,
+              letterSpacing: 0.8,
             }}
           >
-            TOTAL
+            CARRITO · {cart.count()} ITEMS
           </Text>
-          <Text
-            style={{
-              color: colors.green,
-              fontFamily: "SpaceGrotesk_700Bold",
-              fontSize: 26,
-            }}
-          >
-            {money(total)}
-          </Text>
+          {cart.items.length > 0 && (
+            <Pressable
+              onPress={() => cart.clear()}
+              style={{
+                paddingHorizontal: 10,
+                paddingVertical: 6,
+                borderRadius: 999,
+                borderWidth: 1,
+                borderColor: colors.danger,
+              }}
+            >
+              <Text
+                style={{
+                  color: colors.danger,
+                  fontFamily: "SpaceGrotesk_700Bold",
+                  fontSize: 11,
+                  letterSpacing: 0.5,
+                }}
+              >
+                VACIAR
+              </Text>
+            </Pressable>
+          )}
         </View>
-        <View style={{ marginTop: 10 }}>
+
+        <ScrollView
+          style={{ flex: 1 }}
+          contentContainerStyle={{ paddingHorizontal: 12, paddingVertical: 10 }}
+        >
+          {cart.items.length === 0 ? (
+            <View style={{ paddingVertical: 40, alignItems: "center" }}>
+              <View
+                style={{
+                  width: 64,
+                  height: 64,
+                  borderRadius: 999,
+                  backgroundColor: colors.surface2,
+                  alignItems: "center",
+                  justifyContent: "center",
+                  marginBottom: 12,
+                }}
+              >
+                <Ionicons name="cart-outline" size={30} color={colors.textMuted} />
+              </View>
+              <Text
+                style={{
+                  color: colors.textMuted,
+                  fontFamily: "SpaceGrotesk_600SemiBold",
+                  fontSize: 13,
+                  letterSpacing: 0.5,
+                }}
+              >
+                AGREGA PRODUCTOS AL CARRITO
+              </Text>
+            </View>
+          ) : (
+            cart.items.map((it) => (
+              <CartItemRow
+                key={it.productoId}
+                item={it}
+                onInc={() => cart.inc(it.productoId)}
+                onDec={() => cart.dec(it.productoId)}
+                onRemove={() => cart.remove(it.productoId)}
+              />
+            ))
+          )}
+        </ScrollView>
+
+        <View
+          style={{
+            padding: 14,
+            borderTopWidth: 1,
+            borderColor: colors.border,
+            gap: 12,
+          }}
+        >
+          <SectionLabel>MÉTODO DE PAGO</SectionLabel>
+          <View style={{ flexDirection: "row", flexWrap: "wrap", marginHorizontal: -4 }}>
+            {METODOS.map((m) => (
+              <PaymentMethodChip
+                key={m.key}
+                method={m}
+                selected={cart.metodo === m.key}
+                onPress={() => cart.setMetodo(m.key)}
+              />
+            ))}
+          </View>
+
+          {requiereCambio && (
+            <View>
+              <SectionLabel>MONTO RECIBIDO</SectionLabel>
+              <TextInput
+                value={cart.recibido}
+                onChangeText={cart.setRecibido}
+                keyboardType="decimal-pad"
+                placeholder="0.00"
+                placeholderTextColor={colors.textMuted}
+                style={{
+                  backgroundColor: colors.surface2,
+                  borderWidth: 1.5,
+                  borderColor: colors.borderStrong,
+                  borderRadius: 12,
+                  paddingHorizontal: 14,
+                  paddingVertical: 12,
+                  color: colors.text,
+                  fontFamily: "SpaceGrotesk_700Bold",
+                  fontSize: 20,
+                  marginTop: 4,
+                }}
+              />
+              {cart.items.length > 0 && (
+                <Text
+                  style={{
+                    color: cambio >= 0 ? colors.green : colors.danger,
+                    fontFamily: "SpaceGrotesk_700Bold",
+                    fontSize: 14,
+                    marginTop: 6,
+                    letterSpacing: 0.3,
+                  }}
+                >
+                  CAMBIO: {money(Math.max(0, cambio))}
+                </Text>
+              )}
+            </View>
+          )}
+
+          <View
+            style={{
+              paddingVertical: 14,
+              paddingHorizontal: 16,
+              backgroundColor: colors.text,
+              borderRadius: 14,
+              flexDirection: "row",
+              justifyContent: "space-between",
+              alignItems: "center",
+            }}
+          >
+            <Text
+              style={{
+                color: colors.white,
+                fontFamily: "SpaceGrotesk_700Bold",
+                fontSize: 16,
+                letterSpacing: 1,
+              }}
+            >
+              TOTAL
+            </Text>
+            <Text
+              style={{
+                color: colors.white,
+                fontFamily: "SpaceGrotesk_700Bold",
+                fontSize: 30,
+                letterSpacing: 0.5,
+              }}
+            >
+              {money(total)}
+            </Text>
+          </View>
           <NeoButton
             label="Cobrar venta"
             onPress={cobrar}
-            variant="black"
+            variant="primary"
             size="lg"
             full
             disabled={!puedeCobrar}
           />
         </View>
-      </View>
+      </Card>
     </View>
   );
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: colors.bg }} edges={["top"]}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: colors.surface2 }} edges={["top"]}>
       <Header title="Power Gym" showBackoffice />
       {isTablet ? (
         <View style={{ flex: 1, flexDirection: "row" }}>
@@ -404,6 +425,49 @@ export default function POSScreen() {
   );
 }
 
+function Card({
+  children,
+  style,
+}: {
+  children: React.ReactNode;
+  style?: any;
+}) {
+  const { colors } = useTheme();
+  return (
+    <View
+      style={[
+        {
+          backgroundColor: colors.card,
+          borderColor: colors.borderStrong,
+          borderWidth: 1.5,
+          borderRadius: 16,
+          padding: 14,
+        },
+        style,
+      ]}
+    >
+      {children}
+    </View>
+  );
+}
+
+function SectionLabel({ children }: { children: React.ReactNode }) {
+  const { colors } = useTheme();
+  return (
+    <Text
+      style={{
+        color: colors.textMuted,
+        fontFamily: "SpaceGrotesk_700Bold",
+        fontSize: 11,
+        letterSpacing: 1.2,
+        marginBottom: 8,
+      }}
+    >
+      {children}
+    </Text>
+  );
+}
+
 function MobileTabs({
   tab,
   setTab,
@@ -426,8 +490,8 @@ function MobileTabs({
     <View
       style={{
         flexDirection: "row",
-        borderTopWidth: 2,
-        borderColor: colors.border,
+        borderTopWidth: 1,
+        borderColor: colors.borderStrong,
         backgroundColor: colors.bg,
       }}
     >
@@ -442,7 +506,7 @@ function MobileTabs({
             }}
             style={{
               flex: 1,
-              paddingVertical: 8,
+              paddingVertical: 10,
               alignItems: "center",
               backgroundColor: active ? colors.surface2 : "transparent",
             }}
@@ -450,7 +514,7 @@ function MobileTabs({
             <View>
               <Ionicons
                 name={it.icon}
-                size={22}
+                size={24}
                 color={active ? colors.accent : colors.textMuted}
               />
               {"badge" in it && it.badge > 0 && (
@@ -459,9 +523,9 @@ function MobileTabs({
                     position: "absolute",
                     top: -4,
                     right: -8,
-                    minWidth: 16,
-                    height: 16,
-                    borderRadius: 8,
+                    minWidth: 18,
+                    height: 18,
+                    borderRadius: 9,
                     backgroundColor: colors.accent,
                     paddingHorizontal: 4,
                     alignItems: "center",
@@ -472,7 +536,7 @@ function MobileTabs({
                     style={{
                       color: colors.white,
                       fontFamily: "SpaceGrotesk_700Bold",
-                      fontSize: 10,
+                      fontSize: 11,
                     }}
                   >
                     {it.badge}
@@ -482,7 +546,7 @@ function MobileTabs({
             </View>
             <Text
               style={{
-                fontSize: 9,
+                fontSize: 10,
                 marginTop: 4,
                 color: active ? colors.text : colors.textMuted,
                 fontFamily: "SpaceGrotesk_700Bold",
