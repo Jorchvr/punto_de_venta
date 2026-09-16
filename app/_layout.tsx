@@ -21,14 +21,36 @@ import { useCloud } from "@/stores/cloud.store";
 
 SplashScreen.preventAutoHideAsync().catch(() => {});
 
+const DB_TIMEOUT_MS = 15000;
+
+function withTimeout<T>(p: Promise<T>, ms: number, label: string): Promise<T> {
+  return new Promise((resolve, reject) => {
+    const t = setTimeout(
+      () => reject(new Error(`${label}: no respondió en ${ms / 1000}s`)),
+      ms
+    );
+    p.then(
+      (v) => {
+        clearTimeout(t);
+        resolve(v);
+      },
+      (e) => {
+        clearTimeout(t);
+        reject(e);
+      }
+    );
+  });
+}
+
 export default function RootLayout() {
   const [dbReady, setDbReady] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [stage, setStage] = useState("Iniciando...");
   const theme = useTheme();
   const session = useSession();
   const cloud = useCloud();
 
-  const [fontsLoaded] = useFonts({
+  useFonts({
     Fraunces_400Regular: Manrope_400Regular,
     Fraunces_500Medium: Manrope_500Medium,
     Fraunces_600SemiBold: Manrope_600SemiBold,
@@ -39,7 +61,14 @@ export default function RootLayout() {
   useEffect(() => {
     (async () => {
       try {
-        await Promise.all([theme.hydrate(), session.hydrate(), cloud.hydrate(), getDb()]);
+        setStage("Restaurando sesión...");
+        await withTimeout(
+          Promise.all([theme.hydrate(), session.hydrate(), cloud.hydrate()]),
+          5000,
+          "Sesión"
+        );
+        setStage("Cargando base de datos...");
+        await withTimeout(getDb(), DB_TIMEOUT_MS, "Base de datos");
         setDbReady(true);
       } catch (e: any) {
         setError(String(e?.message ?? e));
@@ -50,12 +79,12 @@ export default function RootLayout() {
   }, []);
 
   useEffect(() => {
-    if (fontsLoaded && dbReady) {
+    if (dbReady) {
       SplashScreen.hideAsync().catch(() => {});
     }
-  }, [fontsLoaded, dbReady]);
+  }, [dbReady]);
 
-  if (!fontsLoaded || !dbReady) {
+  if (!dbReady) {
     return (
       <View
         style={{
@@ -63,9 +92,19 @@ export default function RootLayout() {
           justifyContent: "center",
           alignItems: "center",
           backgroundColor: theme.colors.bg,
+          padding: 20,
         }}
       >
-        <ActivityIndicator color={theme.colors.accent} />
+        <ActivityIndicator color={theme.colors.accent} size="large" />
+        <Text
+          style={{
+            color: theme.colors.textMuted,
+            marginTop: 16,
+            fontSize: 14,
+          }}
+        >
+          {stage}
+        </Text>
       </View>
     );
   }
@@ -77,13 +116,40 @@ export default function RootLayout() {
           flex: 1,
           justifyContent: "center",
           alignItems: "center",
-          padding: 20,
+          padding: 24,
           backgroundColor: theme.colors.bg,
         }}
       >
-        <Text style={{ color: theme.colors.pink, fontSize: 16, textAlign: "center" }}>
-          Error al iniciar la BD:{"\n"}
+        <Text
+          style={{
+            color: theme.colors.danger,
+            fontSize: 18,
+            fontWeight: "700",
+            textAlign: "center",
+            marginBottom: 12,
+          }}
+        >
+          No se pudo iniciar
+        </Text>
+        <Text
+          style={{
+            color: theme.colors.text,
+            fontSize: 14,
+            textAlign: "center",
+            marginBottom: 16,
+          }}
+        >
           {error}
+        </Text>
+        <Text
+          style={{
+            color: theme.colors.textMuted,
+            fontSize: 12,
+            textAlign: "center",
+          }}
+        >
+          Recargá la página (Ctrl+F5 o cerrá y volvé a abrir).{"\n"}
+          Si persiste, verificá tu conexión a internet.
         </Text>
       </View>
     );
