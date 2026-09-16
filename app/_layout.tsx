@@ -6,11 +6,12 @@ import { StatusBar } from "expo-status-bar";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import {
   useFonts,
-  Inter_400Regular,
-  Inter_500Medium,
-  Inter_600SemiBold,
-  Inter_700Bold,
-} from "@expo-google-fonts/inter";
+  Archivo_400Regular,
+  Archivo_500Medium,
+  Archivo_600SemiBold,
+  Archivo_700Bold,
+  Archivo_800ExtraBold,
+} from "@expo-google-fonts/archivo";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import * as SplashScreen from "expo-splash-screen";
 import { getDb } from "@/db/client";
@@ -26,10 +27,10 @@ export default function RootLayout() {
   const session = useSession();
 
   const [fontsLoaded] = useFonts({
-    Fraunces_400Regular: Inter_400Regular,
-    Fraunces_500Medium: Inter_500Medium,
-    Fraunces_600SemiBold: Inter_600SemiBold,
-    Fraunces_700Bold: Inter_700Bold,
+    Fraunces_400Regular: Archivo_400Regular,
+    Fraunces_500Medium: Archivo_500Medium,
+    Fraunces_600SemiBold: Archivo_600SemiBold,
+    Fraunces_700Bold: Archivo_800ExtraBold,
     ...Ionicons.font,
   });
 

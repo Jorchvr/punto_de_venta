@@ -11,7 +11,7 @@ export const METODOS: { key: MetodoPago; label: string; emoji: string }[] = [
 ];
 
 const SHADOW = "#0F0F17";
-const OFFSET = 4;
+const OFFSET = 5;
 
 interface Props {
   method: (typeof METODOS)[number];
@@ -33,7 +33,7 @@ export function PaymentMethodChip({ method, selected, onPress }: Props) {
           right: 0,
           bottom: 0,
           backgroundColor: SHADOW,
-          borderRadius: 10,
+          borderRadius: 12,
         }}
       />
       <Pressable
@@ -42,9 +42,9 @@ export function PaymentMethodChip({ method, selected, onPress }: Props) {
         onPressOut={() => setPressed(false)}
         style={{
           backgroundColor: selected ? colors.accent : colors.card,
-          borderWidth: 2.5,
+          borderWidth: 3.5,
           borderColor: SHADOW,
-          borderRadius: 10,
+          borderRadius: 12,
           paddingVertical: 12,
           paddingHorizontal: 10,
           alignItems: "center",

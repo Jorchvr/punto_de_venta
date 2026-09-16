@@ -11,7 +11,7 @@ interface Props {
 }
 
 const SHADOW = "#0F0F17";
-const OFFSET = 4;
+const OFFSET = 6;
 
 export function ProductCard({ producto, onPress, width = 180 }: Props) {
   const { colors } = useTheme();
@@ -29,7 +29,7 @@ export function ProductCard({ producto, onPress, width = 180 }: Props) {
           right: 0,
           bottom: 0,
           backgroundColor: SHADOW,
-          borderRadius: 10,
+          borderRadius: 12,
         }}
       />
       <Pressable
@@ -38,10 +38,10 @@ export function ProductCard({ producto, onPress, width = 180 }: Props) {
         onPressOut={() => setPressed(false)}
         style={{
           flex: 1,
-          backgroundColor: colors.card,
+          backgroundColor: pressed ? colors.accentSoft : colors.card,
           borderColor: SHADOW,
-          borderWidth: 2.5,
-          borderRadius: 10,
+          borderWidth: 3.5,
+          borderRadius: 12,
           padding: 12,
           justifyContent: "space-between",
           transform: [

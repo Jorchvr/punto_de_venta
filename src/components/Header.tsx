@@ -90,7 +90,7 @@ export function Header({
               paddingVertical: 8,
               backgroundColor: colors.card,
               borderRadius: 10,
-              borderWidth: 1.5,
+              borderWidth: 2.5,
               borderColor: colors.borderStrong,
             }}
           >

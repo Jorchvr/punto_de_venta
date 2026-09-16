@@ -58,10 +58,10 @@ export function NeoButton({
   const { colors } = useTheme();
   const [pressed, setPressed] = useState(false);
 
-  const pad = size === "sm" ? 9 : size === "lg" ? 16 : 12;
-  const font = size === "sm" ? 12 : size === "lg" ? 17 : 14;
-  const radius = size === "sm" ? 8 : 10;
-  const offset = size === "sm" ? 3 : size === "lg" ? 5 : 4;
+  const pad = size === "sm" ? 10 : size === "lg" ? 17 : 13;
+  const font = size === "sm" ? 12 : size === "lg" ? 18 : 15;
+  const radius = size === "sm" ? 10 : 12;
+  const offset = size === "sm" ? 4 : size === "lg" ? 6 : 5;
 
   const bg = variantBg(variant, colors);
   const fg = variantFg(variant, colors);
@@ -95,7 +95,7 @@ export function NeoButton({
         style={{
           backgroundColor: bg,
           borderColor: SHADOW,
-          borderWidth: 2.5,
+          borderWidth: 3.5,
           borderRadius: radius,
           paddingVertical: pad,
           paddingHorizontal: pad + 6,

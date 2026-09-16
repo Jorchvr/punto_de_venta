@@ -137,7 +137,7 @@ export default function POSScreen() {
             alignItems: "center",
             backgroundColor: colors.surface2,
             borderColor: colors.borderStrong,
-            borderWidth: 1.5,
+            borderWidth: 2.5,
             borderRadius: 12,
             paddingHorizontal: 12,
             marginTop: 4,
@@ -471,12 +471,12 @@ function Card({
       <View
         style={{
           position: "absolute",
-          top: 5,
-          left: 5,
+          top: 6,
+          left: 6,
           right: 0,
           bottom: 0,
           backgroundColor: "#0F0F17",
-          borderRadius: 14,
+          borderRadius: 16,
         }}
       />
       <View
@@ -484,8 +484,8 @@ function Card({
           {
             backgroundColor: colors.card,
             borderColor: "#0F0F17",
-            borderWidth: 2.5,
-            borderRadius: 14,
+            borderWidth: 3.5,
+            borderRadius: 16,
             padding: compact ? 12 : 16,
           },
           style,
@@ -541,13 +541,13 @@ function QuickTile({
 }) {
   const { colors } = useTheme();
   const [pressed, setPressed] = useState(false);
-  const OFFSET = 5;
+  const OFFSET = 6;
   const SHADOW = "#0F0F17";
   const badgeBg = tone === "accent" ? colors.accent : colors.surface2;
   const badgeFg = tone === "accent" ? colors.white : colors.text;
 
   return (
-    <View style={{ position: "relative", height: 92 }}>
+    <View style={{ position: "relative", height: 98 }}>
       <View
         style={{
           position: "absolute",
@@ -556,7 +556,7 @@ function QuickTile({
           right: 0,
           bottom: 0,
           backgroundColor: SHADOW,
-          borderRadius: 12,
+          borderRadius: 14,
         }}
       />
       <Pressable
@@ -567,8 +567,8 @@ function QuickTile({
           flex: 1,
           backgroundColor: colors.card,
           borderColor: SHADOW,
-          borderWidth: 2.5,
-          borderRadius: 12,
+          borderWidth: 3.5,
+          borderRadius: 14,
           padding: 12,
           flexDirection: "row",
           alignItems: "center",
@@ -581,17 +581,17 @@ function QuickTile({
       >
         <View
           style={{
-            width: 52,
-            height: 52,
-            borderRadius: 10,
+            width: 54,
+            height: 54,
+            borderRadius: 12,
             backgroundColor: badgeBg,
-            borderWidth: 2.5,
+            borderWidth: 3,
             borderColor: SHADOW,
             alignItems: "center",
             justifyContent: "center",
           }}
         >
-          <Ionicons name={icon} size={26} color={badgeFg} />
+          <Ionicons name={icon} size={28} color={badgeFg} />
         </View>
         <Text
           style={{
