@@ -30,6 +30,26 @@ export default function Root({ children }: PropsWithChildren) {
                 font-weight:normal;
                 font-style:normal;
               }
+              @font-face{
+                font-family:'Fraunces_400Regular';
+                src:url('/Manrope-Regular.ttf') format('truetype');
+                font-display:swap;
+              }
+              @font-face{
+                font-family:'Fraunces_500Medium';
+                src:url('/Manrope-Medium.ttf') format('truetype');
+                font-display:swap;
+              }
+              @font-face{
+                font-family:'Fraunces_600SemiBold';
+                src:url('/Manrope-SemiBold.ttf') format('truetype');
+                font-display:swap;
+              }
+              @font-face{
+                font-family:'Fraunces_700Bold';
+                src:url('/Manrope-ExtraBold.ttf') format('truetype');
+                font-display:swap;
+              }
             `,
           }}
         />
