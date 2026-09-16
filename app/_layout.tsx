@@ -17,6 +17,7 @@ import * as SplashScreen from "expo-splash-screen";
 import { getDb } from "@/db/client";
 import { useTheme } from "@/stores/theme.store";
 import { useSession } from "@/stores/session.store";
+import { useCloud } from "@/stores/cloud.store";
 
 SplashScreen.preventAutoHideAsync().catch(() => {});
 
@@ -25,6 +26,7 @@ export default function RootLayout() {
   const [error, setError] = useState<string | null>(null);
   const theme = useTheme();
   const session = useSession();
+  const cloud = useCloud();
 
   const [fontsLoaded] = useFonts({
     Fraunces_400Regular: Manrope_400Regular,
@@ -37,7 +39,7 @@ export default function RootLayout() {
   useEffect(() => {
     (async () => {
       try {
-        await Promise.all([theme.hydrate(), session.hydrate(), getDb()]);
+        await Promise.all([theme.hydrate(), session.hydrate(), cloud.hydrate(), getDb()]);
         setDbReady(true);
       } catch (e: any) {
         setError(String(e?.message ?? e));

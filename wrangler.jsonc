@@ -1,0 +1,13 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "punto-de-venta",
+  "compatibility_date": "2025-01-15",
+  "pages_build_output_dir": "./dist",
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "powergym-pos",
+      "database_id": "REEMPLAZAR_CON_ID_DE_D1"
+    }
+  ]
+}

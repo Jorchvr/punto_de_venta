@@ -23,8 +23,10 @@ import {
 } from "@/db/usuarios.repo";
 import { useSession } from "@/stores/session.store";
 import { useTheme } from "@/stores/theme.store";
+import { useCloud } from "@/stores/cloud.store";
 import { restaurar as restaurarBDPlatform } from "@/utils/backup";
 import { avisar, confirmar } from "@/utils/confirm";
+import { healthCheck } from "@/api/client";
 
 export default function AjustesScreen() {
   const { colors } = useTheme();
@@ -146,6 +148,8 @@ export default function AjustesScreen() {
           <NeoButton label="Restaurar BD" variant="blue" onPress={restaurarBD} />
         </Section>
 
+        <NubeSection />
+
         <Section title="SESION">
           <NeoButton label="Cerrar sesion" variant="pink" onPress={cerrarSesion} />
         </Section>
@@ -173,6 +177,77 @@ export default function AjustesScreen() {
         }}
       />
     </SafeAreaView>
+  );
+}
+
+function NubeSection() {
+  const { colors } = useTheme();
+  const { enabled, apiKey, status, lastError, setEnabled, setApiKey } = useCloud();
+  const [key, setKey] = useState(apiKey);
+  const [checking, setChecking] = useState(false);
+
+  useEffect(() => {
+    setKey(apiKey);
+  }, [apiKey]);
+
+  const guardar = async () => {
+    await setApiKey(key.trim());
+    avisar("API key guardada");
+  };
+
+  const probar = async () => {
+    setChecking(true);
+    const ok = await healthCheck();
+    setChecking(false);
+    avisar(ok ? "Conexión OK" : "Error de conexión", ok ? undefined : lastError ?? "");
+  };
+
+  const dotColor =
+    status === "ok" ? colors.success : status === "error" ? colors.danger : colors.textMuted;
+
+  return (
+    <Section title="BD EN LA NUBE (CLOUDFLARE D1)">
+      <Text style={txtHint(colors.textMuted)}>
+        SI ACTIVAS, TODAS LAS VENTAS/PRODUCTOS/USUARIOS SE COMPARTEN ENTRE TODOS LOS DISPOSITIVOS QUE USEN LA MISMA API KEY.
+      </Text>
+      <View style={{ flexDirection: "row", alignItems: "center", gap: 10, marginTop: 4 }}>
+        <View style={{ width: 10, height: 10, borderRadius: 5, backgroundColor: dotColor }} />
+        <Text style={{ color: colors.textMuted, fontFamily: "Fraunces_600SemiBold", fontSize: 12 }}>
+          {status === "ok" ? "CONECTADO" : status === "error" ? "ERROR" : "INACTIVO"}
+        </Text>
+        <View style={{ flex: 1 }} />
+        <Switch value={enabled} onValueChange={setEnabled} />
+      </View>
+      <Text style={txtHint(colors.textMuted)}>API KEY</Text>
+      <TextInput
+        value={key}
+        onChangeText={setKey}
+        placeholder="pega aquí la clave que configuraste en Cloudflare"
+        placeholderTextColor={colors.textMuted}
+        secureTextEntry
+        autoCapitalize="none"
+        style={inputStyle(colors)}
+      />
+      <View style={{ flexDirection: "row", gap: 8 }}>
+        <View style={{ flex: 1 }}>
+          <NeoButton label="Guardar" variant="green" full onPress={guardar} />
+        </View>
+        <View style={{ flex: 1 }}>
+          <NeoButton
+            label={checking ? "Probando..." : "Probar conexión"}
+            variant="blue"
+            full
+            onPress={probar}
+            disabled={checking || !key.trim()}
+          />
+        </View>
+      </View>
+      {lastError && status === "error" && (
+        <Text style={{ color: colors.danger, fontFamily: "Fraunces_500Medium", fontSize: 11 }}>
+          {lastError}
+        </Text>
+      )}
+    </Section>
   );
 }
 

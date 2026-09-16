@@ -131,3 +131,60 @@ Los datos viven en el navegador del dispositivo (IndexedDB). Si el usuario borra
 
 - Usar **Respaldar BD** desde Corte de caja regularmente → descarga `.db`.
 - En otro dispositivo/browser: **Restaurar BD** desde Ajustes → subir el `.db`.
+
+## BD compartida en la nube (Cloudflare D1)
+
+Opcional. Permite que varias cajas/dispositivos usen la MISMA base de datos: productos, ventas y usuarios se ven en tiempo real desde cualquier equipo con la misma API key. Todo dentro del free tier de Cloudflare (5GB storage, 5M lecturas/día, 100k escrituras/día).
+
+### 1. Crear la base D1
+
+En el dashboard de Cloudflare:
+
+1. **Workers & Pages** → **D1 SQL Database** → **Create database**.
+2. Nombre: `powergym-pos` (o el que prefieras).
+3. Copiar el `Database ID` que aparece.
+
+### 2. Vincular D1 al proyecto Pages
+
+1. En tu proyecto Pages → **Settings** → **Bindings** (o **Functions** → **D1 database bindings**).
+2. **Add binding**:
+   - Variable name: `DB`
+   - D1 database: seleccionar la que creaste.
+3. **Save**.
+
+(Alternativamente, editar `wrangler.jsonc` en el repo con el `database_id` correcto y hacer push — Cloudflare toma la config del archivo).
+
+### 3. Configurar la API key secreta
+
+En tu proyecto Pages → **Settings** → **Environment variables** → **Production** (y **Preview** si vas a usarlo también en preview):
+
+- **Add variable**:
+  - Nombre: `API_KEY`
+  - Valor: una cadena random y larga (ej: generá una con `openssl rand -base64 32` o cualquier password manager). **Guardala en tu password manager**, no la pierdas.
+  - Marcar como **Encrypted** (secret).
+- **Save** y hacer **Retry deployment** para que el cambio aplique.
+
+### 4. Activar la nube en la app
+
+1. Abrí la web app (ya deployada).
+2. **Ajustes** → sección **BD EN LA NUBE**.
+3. Pegá la misma API key que pusiste en Cloudflare.
+4. **Guardar** → **Probar conexión** (debe decir "Conexión OK").
+5. Activá el switch. Desde ahora todas las lecturas/escrituras van a D1.
+
+### 5. Configurar la caja 2 (o más)
+
+En cada dispositivo/navegador nuevo:
+
+1. Abrir la web app.
+2. **Ajustes** → **BD EN LA NUBE** → pegar la MISMA API key.
+3. Guardar y activar el switch.
+
+Todas las cajas ahora comparten la misma base. Las ventas hechas en la caja 1 aparecen en el historial de la caja 2 al recargar la pantalla.
+
+### Notas importantes
+
+- **La API key es sensible**: cualquiera con la key + URL puede escribir en tu BD. No la publiques.
+- **Modo local sigue disponible**: si el switch está apagado, cada equipo usa su BD local independiente (como antes).
+- **Offline en modo nube**: si no hay internet, las operaciones fallan con error. No hay cola offline por ahora — se agregará si hace falta.
+- **El schema se crea automáticamente**: la primera vez que llegue una request al API, las tablas se crean en D1 solas (idempotente).

@@ -17,8 +17,14 @@
     ]
   },
   "include": [
-    "**/*.ts",
-    "**/*.tsx",
+    "app/**/*.ts",
+    "app/**/*.tsx",
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "scripts/**/*.ts",
     "nativewind-env.d.ts"
+  ],
+  "exclude": [
+    "functions/**"
   ]
 }

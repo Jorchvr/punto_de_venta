@@ -1,4 +1,6 @@
 import { getDb } from "./client";
+import { api } from "@/api/client";
+import { isCloudActive } from "@/stores/cloud.store";
 
 export type MetodoPago = "Efectivo" | "Transferencia" | "Tarjeta" | "Dolares";
 
@@ -29,9 +31,15 @@ export async function checkoutCart(
   usuario: string
 ): Promise<number[]> {
   if (lines.length === 0) throw new Error("Carrito vacio");
+  const fechaLocal = toSqlite(new Date());
+
+  if (isCloudActive()) {
+    await api.post("/ventas", { lines, metodo, usuario, fecha: fechaLocal });
+    return lines.map((_, i) => i);
+  }
+
   const db = await getDb();
   const insertedIds: number[] = [];
-  const fechaLocal = toSqlite(new Date());
 
   await db.withTransactionAsync(async () => {
     for (const line of lines) {
@@ -68,6 +76,11 @@ export async function ventasByRango(
   desdeIso: string,
   hastaIso: string
 ): Promise<Venta[]> {
+  if (isCloudActive()) {
+    return api.get<Venta[]>(
+      `/ventas?desde=${encodeURIComponent(desdeIso)}&hasta=${encodeURIComponent(hastaIso)}`
+    );
+  }
   const db = await getDb();
   return db.getAllAsync<Venta>(
     "SELECT * FROM Ventas WHERE Fecha >= ? AND Fecha <= ? ORDER BY Fecha DESC",
@@ -76,17 +89,17 @@ export async function ventasByRango(
 }
 
 export async function ventasHoy(): Promise<Venta[]> {
-  const db = await getDb();
   const now = new Date();
   const start = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0, 0);
   const end = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 23, 59, 59);
-  return db.getAllAsync<Venta>(
-    "SELECT * FROM Ventas WHERE Fecha >= ? AND Fecha <= ? ORDER BY Fecha DESC",
-    [toSqlite(start), toSqlite(end)]
-  );
+  return ventasByRango(toSqlite(start), toSqlite(end));
 }
 
 export async function refundVenta(id: number): Promise<void> {
+  if (isCloudActive()) {
+    await api.post(`/ventas/${id}/refund`);
+    return;
+  }
   const db = await getDb();
   await db.withTransactionAsync(async () => {
     const v = await db.getFirstAsync<Venta>("SELECT * FROM Ventas WHERE Id=?", [id]);
@@ -113,8 +126,6 @@ export function toSqlite(d: Date): string {
 }
 
 export function fromSqlite(s: string): Date {
-  // Nuevo formato desde checkoutCart es local ("YYYY-MM-DD HH:MM:SS" sin Z).
-  // Formato viejo (CURRENT_TIMESTAMP) era UTC — se detecta por el sufijo Z o T.
   if (s.includes("T") || s.endsWith("Z")) return new Date(s);
   const parts = s.split(" ");
   const [y, m, d] = parts[0].split("-").map(Number);
