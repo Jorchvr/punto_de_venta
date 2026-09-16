@@ -76,10 +76,6 @@ export default function POSScreen() {
     load();
   }, [load]);
 
-  useEffect(() => {
-    if (!usuario) router.replace("/login");
-  }, [usuario, router]);
-
   const total = cart.total();
   const requiereCambio = cart.metodo === "Efectivo" || cart.metodo === "Dolares";
   const recibidoNum = parseAmount(cart.recibido);

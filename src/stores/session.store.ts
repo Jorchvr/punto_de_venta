@@ -17,8 +17,8 @@ const K_ROL = "@bm:rol";
 const K_NEG = "@bm:negocio";
 
 export const useSession = create<SessionState>((set) => ({
-  usuario: null,
-  rol: null,
+  usuario: "ADMIN",
+  rol: "Admin",
   negocio: "POWER GYM",
   ready: false,
   hydrate: async () => {
@@ -29,8 +29,8 @@ export const useSession = create<SessionState>((set) => ({
         AsyncStorage.getItem(K_NEG),
       ]);
       set({
-        usuario: u,
-        rol: (r as "Admin" | "Cajero" | null) ?? null,
+        usuario: u ?? "ADMIN",
+        rol: (r as "Admin" | "Cajero" | null) ?? "Admin",
         negocio: n ?? "POWER GYM",
         ready: true,
       });
@@ -44,7 +44,7 @@ export const useSession = create<SessionState>((set) => ({
     await AsyncStorage.setItem(K_ROL, rol);
   },
   logout: async () => {
-    set({ usuario: null, rol: null });
+    set({ usuario: "ADMIN", rol: "Admin" });
     await AsyncStorage.removeItem(K_USER);
     await AsyncStorage.removeItem(K_ROL);
   },

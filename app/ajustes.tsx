@@ -30,7 +30,7 @@ import { healthCheck } from "@/api/client";
 
 export default function AjustesScreen() {
   const { colors } = useTheme();
-  const { negocio, setNegocio, logout } = useSession();
+  const { negocio, setNegocio } = useSession();
   const router = useRouter();
   const [neg, setNeg] = useState(negocio);
   const [users, setUsers] = useState<Usuario[]>([]);
@@ -58,11 +58,6 @@ export default function AjustesScreen() {
     } catch (e: any) {
       avisar("Error", String(e?.message ?? e));
     }
-  };
-
-  const cerrarSesion = async () => {
-    await logout();
-    router.replace("/login");
   };
 
   const eliminarUsuario = (u: Usuario) => {
@@ -149,10 +144,6 @@ export default function AjustesScreen() {
         </Section>
 
         <NubeSection />
-
-        <Section title="SESION">
-          <NeoButton label="Cerrar sesion" variant="pink" onPress={cerrarSesion} />
-        </Section>
 
         <Text
           style={{
