@@ -6,12 +6,12 @@ import { StatusBar } from "expo-status-bar";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import {
   useFonts,
-  Archivo_400Regular,
-  Archivo_500Medium,
-  Archivo_600SemiBold,
-  Archivo_700Bold,
-  Archivo_800ExtraBold,
-} from "@expo-google-fonts/archivo";
+  Manrope_400Regular,
+  Manrope_500Medium,
+  Manrope_600SemiBold,
+  Manrope_700Bold,
+  Manrope_800ExtraBold,
+} from "@expo-google-fonts/manrope";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import * as SplashScreen from "expo-splash-screen";
 import { getDb } from "@/db/client";
@@ -27,10 +27,10 @@ export default function RootLayout() {
   const session = useSession();
 
   const [fontsLoaded] = useFonts({
-    Fraunces_400Regular: Archivo_400Regular,
-    Fraunces_500Medium: Archivo_500Medium,
-    Fraunces_600SemiBold: Archivo_600SemiBold,
-    Fraunces_700Bold: Archivo_800ExtraBold,
+    Fraunces_400Regular: Manrope_400Regular,
+    Fraunces_500Medium: Manrope_500Medium,
+    Fraunces_600SemiBold: Manrope_600SemiBold,
+    Fraunces_700Bold: Manrope_800ExtraBold,
     ...Ionicons.font,
   });
 
