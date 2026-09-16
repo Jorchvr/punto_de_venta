@@ -1,6 +1,5 @@
 import React, { useCallback, useEffect, useState } from "react";
 import {
-  Alert,
   FlatList,
   Modal,
   Pressable,
@@ -25,6 +24,7 @@ import {
 } from "@/db/productos.repo";
 import { useTheme } from "@/stores/theme.store";
 import { money } from "@/utils/money";
+import { avisar, confirmar } from "@/utils/confirm";
 
 export default function ProductosScreen() {
   const { colors } = useTheme();
@@ -53,17 +53,15 @@ export default function ProductosScreen() {
   };
 
   const remove = (p: Producto) => {
-    Alert.alert("ELIMINAR", `¿ELIMINAR ${p.Nombre.toUpperCase()}?`, [
-      { text: "CANCELAR", style: "cancel" },
-      {
-        text: "ELIMINAR",
-        style: "destructive",
-        onPress: async () => {
-          await deleteProducto(p.Id);
-          await load();
-        },
+    confirmar(
+      "Eliminar producto",
+      `¿Eliminar ${p.Nombre}?`,
+      async () => {
+        await deleteProducto(p.Id);
+        await load();
       },
-    ]);
+      { textoConfirmar: "Eliminar", destructivo: true }
+    );
   };
 
   return (
@@ -241,7 +239,7 @@ function ProductoModal({
 
   const save = async () => {
     if (!form.Nombre.trim()) {
-      Alert.alert("FALTA NOMBRE");
+      avisar("Falta el nombre");
       return;
     }
     const payload: ProductoInput = {

@@ -31,6 +31,7 @@ export async function checkoutCart(
   if (lines.length === 0) throw new Error("Carrito vacio");
   const db = await getDb();
   const insertedIds: number[] = [];
+  const fechaLocal = toSqlite(new Date());
 
   await db.withTransactionAsync(async () => {
     for (const line of lines) {
@@ -52,9 +53,9 @@ export async function checkoutCart(
 
       const concepto = `${line.cantidad}x ${line.nombre}`;
       const res = await db.runAsync(
-        `INSERT INTO Ventas (Concepto, Total, MetodoPago, Usuario, Categoria, StockDespues, ProductoId)
-         VALUES (?, ?, ?, ?, 'PuntoDeVenta', ?, ?)`,
-        [concepto, total, metodo, usuario, stockDespues, line.productoId]
+        `INSERT INTO Ventas (Fecha, Concepto, Total, MetodoPago, Usuario, Categoria, StockDespues, ProductoId)
+         VALUES (?, ?, ?, ?, ?, 'PuntoDeVenta', ?, ?)`,
+        [fechaLocal, concepto, total, metodo, usuario, stockDespues, line.productoId]
       );
       insertedIds.push(res.lastInsertRowId);
     }
@@ -112,8 +113,11 @@ export function toSqlite(d: Date): string {
 }
 
 export function fromSqlite(s: string): Date {
-  // SQLite returns "YYYY-MM-DD HH:MM:SS" in local time from CURRENT_TIMESTAMP (UTC actually).
-  // Handle both.
-  const iso = s.includes("T") ? s : s.replace(" ", "T") + "Z";
-  return new Date(iso);
+  // Nuevo formato desde checkoutCart es local ("YYYY-MM-DD HH:MM:SS" sin Z).
+  // Formato viejo (CURRENT_TIMESTAMP) era UTC — se detecta por el sufijo Z o T.
+  if (s.includes("T") || s.endsWith("Z")) return new Date(s);
+  const parts = s.split(" ");
+  const [y, m, d] = parts[0].split("-").map(Number);
+  const [h, mi, se] = (parts[1] || "00:00:00").split(":").map(Number);
+  return new Date(y, m - 1, d, h, mi, se);
 }

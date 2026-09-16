@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { Alert, FlatList, Text, View } from "react-native";
+import { FlatList, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useRouter } from "expo-router";
 import { Header } from "@/components/Header";
@@ -8,6 +8,7 @@ import { fromSqlite, refundVenta, ventasHoy, type Venta } from "@/db/ventas.repo
 import { useTheme } from "@/stores/theme.store";
 import { fmtTime } from "@/utils/date";
 import { money } from "@/utils/money";
+import { confirmar } from "@/utils/confirm";
 
 export default function DevolucionesScreen() {
   const { colors } = useTheme();
@@ -24,22 +25,16 @@ export default function DevolucionesScreen() {
   }, [load]);
 
   const revertir = (v: Venta) => {
-    Alert.alert(
-      "REVERTIR VENTA",
-      `¿REVERTIR ${v.Concepto.toUpperCase()} POR ${money(v.Total)}?`,
-      [
-        { text: "CANCELAR", style: "cancel" },
-        {
-          text: "REVERTIR",
-          style: "destructive",
-          onPress: async () => {
-            await refundVenta(v.Id);
-            await load();
-            setToast("VENTA REVERTIDA");
-            setTimeout(() => setToast(null), 2000);
-          },
-        },
-      ]
+    confirmar(
+      "Revertir venta",
+      `¿Revertir ${v.Concepto} por ${money(v.Total)}?`,
+      async () => {
+        await refundVenta(v.Id);
+        await load();
+        setToast("VENTA REVERTIDA");
+        setTimeout(() => setToast(null), 2000);
+      },
+      { textoConfirmar: "Revertir", destructivo: true }
     );
   };
 

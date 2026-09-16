@@ -1,6 +1,5 @@
 import React, { useCallback, useEffect, useState } from "react";
 import {
-  Alert,
   Modal,
   Pressable,
   ScrollView,
@@ -25,6 +24,7 @@ import {
 import { useSession } from "@/stores/session.store";
 import { useTheme } from "@/stores/theme.store";
 import { restaurar as restaurarBDPlatform } from "@/utils/backup";
+import { avisar, confirmar } from "@/utils/confirm";
 
 export default function AjustesScreen() {
   const { colors } = useTheme();
@@ -45,16 +45,16 @@ export default function AjustesScreen() {
 
   const guardarNeg = async () => {
     await setNegocio(neg.trim().toUpperCase() || "POWER GYM");
-    Alert.alert("GUARDADO");
+    avisar("Guardado");
   };
 
   const restaurarBD = async () => {
     try {
       const r = await restaurarBDPlatform();
-      if (r.ok) Alert.alert("BD RESTAURADA", r.message);
-      else if (r.message) Alert.alert("AVISO", r.message);
+      if (r.ok) avisar("BD restaurada", r.message);
+      else if (r.message) avisar("Aviso", r.message);
     } catch (e: any) {
-      Alert.alert("ERROR", String(e?.message ?? e));
+      avisar("Error", String(e?.message ?? e));
     }
   };
 
@@ -64,17 +64,15 @@ export default function AjustesScreen() {
   };
 
   const eliminarUsuario = (u: Usuario) => {
-    Alert.alert("ELIMINAR", `¿ELIMINAR ${u.Nombre.toUpperCase()}?`, [
-      { text: "CANCELAR", style: "cancel" },
-      {
-        text: "ELIMINAR",
-        style: "destructive",
-        onPress: async () => {
-          await deleteUsuario(u.Id);
-          await load();
-        },
+    confirmar(
+      "Eliminar usuario",
+      `¿Eliminar ${u.Nombre}?`,
+      async () => {
+        await deleteUsuario(u.Id);
+        await load();
       },
-    ]);
+      { textoConfirmar: "Eliminar", destructivo: true }
+    );
   };
 
   return (
@@ -262,7 +260,7 @@ function UsuarioModal({
 
   const save = async () => {
     if (!nombre.trim()) {
-      Alert.alert("FALTA NOMBRE");
+      avisar("Falta el nombre");
       return;
     }
     const payload = {

@@ -7,7 +7,6 @@ import {
   View,
   useWindowDimensions,
   Pressable,
-  Alert,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useFocusEffect, useRouter } from "expo-router";
@@ -24,6 +23,7 @@ import { useCart } from "@/stores/cart.store";
 import { useSession } from "@/stores/session.store";
 import { useTheme } from "@/stores/theme.store";
 import { money, parseAmount } from "@/utils/money";
+import { avisar } from "@/utils/confirm";
 
 type MobileTab = "productos" | "carrito";
 
@@ -115,7 +115,7 @@ export default function POSScreen() {
       setMobileTab("productos");
       await load();
     } catch (e: any) {
-      Alert.alert("ERROR", String(e?.message ?? e));
+      avisar("Error", String(e?.message ?? e));
     }
   };
 

@@ -144,10 +144,11 @@ class WebDb {
     }
     this.inTransaction = true;
     this.db.run("BEGIN");
+    let committed = false;
     try {
       await cb();
       this.db.run("COMMIT");
-      this.scheduleSave();
+      committed = true;
     } catch (e) {
       try {
         this.db.run("ROLLBACK");
@@ -156,6 +157,7 @@ class WebDb {
     } finally {
       this.inTransaction = false;
     }
+    if (committed) this.scheduleSave();
   }
 
   async closeAsync(): Promise<void> {

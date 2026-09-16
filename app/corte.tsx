@@ -1,6 +1,5 @@
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import {
-  Alert,
   Platform,
   Pressable,
   ScrollView,
@@ -20,6 +19,7 @@ import { fmtDateTime, fmtTime } from "@/utils/date";
 import { money } from "@/utils/money";
 import { respaldar as respaldarBDPlatform } from "@/utils/backup";
 import { printHtml } from "@/utils/print";
+import { avisar } from "@/utils/confirm";
 
 interface Grupo {
   metodo: string;
@@ -65,17 +65,17 @@ export default function CorteScreen() {
       const html = corteHtml({ negocio, cajero: usuario ?? "", fecha: new Date(), numVentas, total, grupos, ventas });
       await printHtml(html);
     } catch (e: any) {
-      Alert.alert("ERROR", String(e?.message ?? e));
+      avisar("Error", String(e?.message ?? e));
     }
   };
 
   const respaldarBD = async () => {
     try {
       const r = await respaldarBDPlatform();
-      if (!r.ok && r.message) Alert.alert("AVISO", r.message);
-      else if (r.ok && r.message && Platform.OS === "web") Alert.alert("OK", r.message);
+      if (!r.ok && r.message) avisar("Aviso", r.message);
+      else if (r.ok && r.message && Platform.OS === "web") avisar("OK", r.message);
     } catch (e: any) {
-      Alert.alert("ERROR", String(e?.message ?? e));
+      avisar("Error", String(e?.message ?? e));
     }
   };
 
